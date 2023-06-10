@@ -1,30 +1,42 @@
 import * as React from 'react';
 import SelfImprovementIcon from '@mui/icons-material/SelfImprovement';
-
+import { useWindowSize } from "../../hooks/useWindowSize";
 import { Box, Button, Container, Divider, Grid, Stack, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 
 
+ 
+
+
 function SelectPrioritesToMemberFamilyComponent({text}) {
+    const DESKTOP_SMALL_SIZE = 1023;
+    const isMobile = (windowSize) => windowSize.width <= DESKTOP_SMALL_SIZE;
+    const windowSize = useWindowSize();
 
     return (
-        <Box display='flex' sx={{ backgroundColor: '#ffffff', minWidth: '100%' }} border={1} borderRadius={1} maxHeight={150} padding={3} >
-            <Box gap={2} pr={4} sx={{minWidth: '50%'}}>
+        <Box 
+            display={isMobile(windowSize) ? "grid" : "flex"}
+            justifyContent={isMobile(windowSize) ? "" : "space-between"}
+            backgroundColor = '#ffffff'
+            border={1}
+            borderRadius={1} >
+            <Box >
                 <Stack direction='row' gap>
                     <SelfImprovementIcon fontSize='large' color="success" />
                     <Stack>
                         <Typography variant='h6'> {text} </Typography>
                         <Box>
-                            <Button variant='outlined'> Reason / Tips</Button>
+                            <Button variant='outlined' > Reason / Tips</Button>
                             <Button variant='outlined'> UnselectAll </Button>
                         </Box>
                     </Stack>
                 </Stack>
             </Box>
 
-            <Box gap={4} sx={{maxWidth: '50%'}}>
-                <Grid container>
-                    <Grid item lg={4} >
-                        <ToggleButton sx={{ margin: '0.5rem' }}>
+            <Box>
+                <Grid container >
+                    <Box >
+                        <ToggleButton 
+                        sx={{margin: '0.5rem'}}>
                             <Stack direction='row' height={42}>
                                 <Stack alignItems='center'> <Box
                                     borderRadius={"16rem"}
@@ -48,12 +60,11 @@ function SelectPrioritesToMemberFamilyComponent({text}) {
                                 </Stack>
                             </Stack>
                         </ToggleButton>
+                    </Box>
 
-                    </Grid>
-
-                    <Grid item lg={4}>
-                        <ToggleButton sx={{ margin: '0.5rem' }}>
-
+                    <Box >
+                        <ToggleButton 
+                        sx={{margin: '0.5rem'}}>
                             <Stack direction='row' height={42}>
                                 <Stack alignItems='center'>
                                     <Box
@@ -78,10 +89,10 @@ function SelectPrioritesToMemberFamilyComponent({text}) {
                                 </Stack>
                             </Stack>
                         </ToggleButton>
-                    </Grid>
-                    <Grid item lg={4}>
-                        <ToggleButton sx={{ margin: '0.5rem' }}>
-
+                    </Box>
+                    <Box >
+                        <ToggleButton 
+                        sx={{margin: '0.5rem'}}>
                             <Stack direction='row' height={42}>
                                 <Stack alignItems='center'>
                                     <Box
@@ -100,13 +111,13 @@ function SelectPrioritesToMemberFamilyComponent({text}) {
                                     />
                                 </Stack>
 
-                                <Stack>
+                                <Stack >
                                     <Typography variant='h6'> Marcos </Typography>
                                     <Typography variant='h7' display='flex' justifyContent='start'> Adult  </Typography>
                                 </Stack>
                             </Stack>
                         </ToggleButton>
-                    </Grid>
+                    </Box>
                 </Grid>
             </Box>
 

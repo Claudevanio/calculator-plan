@@ -165,8 +165,8 @@ function Tutorial() {
     }
   };
 
-  const getVisibleSteps = (recuoStep, avancoStep) => {
-    if (windowSize < 600) {
+  const getVisibleSteps = () => {
+    if (isMobile(windowSize)) {
       return steps.slice(0, 3);
     } else {
       return steps;
@@ -250,7 +250,8 @@ function Tutorial() {
     //   </Box>
     // </Box>
 
-    <Box marginTop="8rem">
+    <Box 
+    marginTop={isMobile(windowSize) ? "3rem" : "8rem"}>
       <Box>
         <Box
           sx={{ background: "white"}}
@@ -259,32 +260,22 @@ function Tutorial() {
         >
           {renderStepContentHeader(activeStep)}
           <Box>
-            <Box sx={{ marginTop: "2rem", background: "white" }}>
-              <Stepper
-                alternativeLabel
-                activeStep={activeStep}
-                connector={<ColorlibConnector />}
-              >
-                {getVisibleSteps().map((label) => (
-                  <Step key={label}>
-                    <StepLabel StepIconComponent={ColorlibStepIcon}>
-                      {label}
-                    </StepLabel>
-                  </Step>
-                ))}
-              </Stepper>
+          <Box sx={{marginTop: '2rem', background: 'white'}}>
+            <Stepper alternativeLabel activeStep={activeStep}  connector={<ColorlibConnector/>}>
+              {getVisibleSteps().map((label) => (
+              <Step key={label}>
+                <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+              </Step>
+              ))}
+            </Stepper>
 
-              <Button
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                sx={{ mr: 1 }}
-              >
-                Back
-              </Button>
-              <Button variant="contained" onClick={handleNext}>
-                {activeStep === steps.length - 1 ? "Finish" : "Next"}
-              </Button>
-            </Box>
+            <Button disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
+            Back
+            </Button>
+            <Button variant="contained" onClick={handleNext}>
+            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+            </Button>
+          </Box>
           </Box>
 
           <Box>

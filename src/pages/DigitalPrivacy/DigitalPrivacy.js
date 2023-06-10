@@ -20,7 +20,6 @@ function DigitalPrivacy() {
                     <Grid item xs={12}> <SelectPrioritesToMemberFamilyComponent text='Trying to avoid oversharing.'/> </Grid>
                     <Grid item xs={12}> <SelectPrioritesToMemberFamilyComponent text='Trying to avoid oversharing.'/> </Grid>
                     <Grid item xs={12}> <SelectPrioritesToMemberFamilyComponent text='Trying to avoid oversharing.'/> </Grid>
-
                 </Grid>
             </Box>
         </Box>

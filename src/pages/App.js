@@ -14,6 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import Tutorial from './Tutorial/tutorial';
+import { useWindowSize } from '../hooks/useWindowSize';
 
 function App(props) {
 
@@ -22,6 +23,11 @@ function App(props) {
 
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
+
+    const windowSize = useWindowSize();
+
+    const DESKTOP_SMALL_SIZE = 1023;
+    const isMobile = (windowSize) => windowSize.width <= DESKTOP_SMALL_SIZE;
 
     const handleDrawerToggle = () => {
         setMobileOpen((prevState) => !prevState);
@@ -52,8 +58,9 @@ function App(props) {
 
 
     return (
-
-        <Container maxWidth='70rem'>
+        <Container 
+        maxWidth='70rem'
+        display={isMobile(windowSize) ? "contents" : ""}>
             <Box >
                 <Box sx={{ display: 'flex' }}>
                     <CssBaseline />
