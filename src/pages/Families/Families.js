@@ -46,27 +46,29 @@ import { AvatarWithBadge } from "../../component/AvatarWithBadge";
               );
             }}
           />
-  
+          <Box>
+          <Typography>Family Member's Name</Typography>
           <TextField id="outlined-basic" label="Family Member's Name" />
+          </Box>
         </Stack>
   
         {/* TODO: adicionar bot"ao para remover o componente ao clicar aqui, deve ser o iconde  removeer... */}
         <DeleteButton />
   
-        <Box>
+        <Box >
           <Typography>Age</Typography>
-          <br />
+          {/* <br /> */}
           <ToggleButtonGroup
-            size="small"
+            sx={{height: '3.5rem'}}
             exclusive
             value={age}
             onChange={handleAge}
           >
-            <ToggleButton value="0-24"> 0-24 months</ToggleButton>
-            <ToggleButton value="2-3"> 2-3 years</ToggleButton>
-            <ToggleButton value="6-12"> 6-12 yearss</ToggleButton>
-            <ToggleButton value="13-18"> 13-18 years</ToggleButton>
-            <ToggleButton value="adult"> Adult </ToggleButton>
+            <ToggleButton value="0-24" sx={{padding: '0px'}}> 0-24 months</ToggleButton>
+            <ToggleButton value="2-3" sx={{padding: '0px'}}> 2-3 years</ToggleButton>
+            <ToggleButton value="6-12" sx={{padding: '0px'}}> 6-12 years</ToggleButton>
+            <ToggleButton value="13-18" sx={{padding: '0px'}}> 13-18 years</ToggleButton>
+            <ToggleButton value="adult" sx={{padding: '0px'}}> Adult </ToggleButton>
           </ToggleButtonGroup>
         </Box>
       </Box>

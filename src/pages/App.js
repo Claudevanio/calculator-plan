@@ -48,7 +48,6 @@ function App(props) {
                         </ListItemButton>
                     </ListItem>
                 ))}
-
                 <Button onClick={handleLanguage()} variant="text">En Espanol</Button>
             </List>
         </Box>
@@ -56,12 +55,9 @@ function App(props) {
 
     const container = window !== undefined ? () => window().document.body : undefined;
 
-
     return (
-        <Container 
-        maxWidth='70rem'
-        display={isMobile(windowSize) ? "contents" : ""}>
-            <Box >
+     
+            <Box>
                 <Box sx={{ display: 'flex' }}>
                     <CssBaseline />
                     <AppBar component="nav">
@@ -111,11 +107,11 @@ function App(props) {
                     <Box>
                         {/* <Home/> */}
                         {/* <Families /> */}
-                        <Tutorial />
+                        <Tutorial/>
                     </Box>
                 </Box>
             </Box>
-        </ Container>
+ 
 
     );
 

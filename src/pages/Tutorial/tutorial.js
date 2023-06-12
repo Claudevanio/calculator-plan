@@ -99,7 +99,7 @@ function Tutorial() {
       case 0:
         return <Step1Component />;
       case 1:
-        return <Box > 
+        return <Box >
           <Box >
             <Box sx={{ padding: '2rem', marginLeft: '5rem', marginRight: '5rem', background: 'white' }}>
               Inserir Video Aqui
@@ -135,7 +135,7 @@ function Tutorial() {
 
 
   const renderStepContentHeader = (step) => {
-    switch (step) {
+   switch (step) {
       case 0:
         return <Step1ComponentHeader />;
       case 1:
@@ -181,12 +181,12 @@ function Tutorial() {
       2: <GroupAddIcon />,
       3: <VideoLabelIcon />,
       4: <SettingsIcon />,
-      5: <SettingsIcon />,
-      6: <SettingsIcon />,
+      5: <GroupAddIcon />,
+      6: <VideoLabelIcon />,
       7: <SettingsIcon />,
-      8: <SettingsIcon />,
+      8: <GroupAddIcon />,
       9: <SettingsIcon />,
-      10: <SettingsIcon />,
+      10: <GroupAddIcon />,
       11: <SettingsIcon />,
       12: <SettingsIcon />,
       13: <SettingsIcon />,
@@ -201,7 +201,7 @@ function Tutorial() {
       </ColorlibStepIconRoot>
     );
   }
-  
+
   const windowSize = useWindowSize();
 
   const DESKTOP_SMALL_SIZE = 1023;
@@ -250,7 +250,7 @@ function Tutorial() {
     //   </Box>
     // </Box>
 
-    <Box 
+    <Box
     marginTop={isMobile(windowSize) ? "3rem" : "8rem"}>
       <Box>
         <Box
@@ -280,7 +280,9 @@ function Tutorial() {
 
           <Box>
             <Box
-              sx={{ padding: "2rem", marginLeft: "1rem", marginRight: "1rem" }}
+            marginLeft={isMobile(windowSize) ? "0rem" : "1rem"}
+            marginRight={isMobile(windowSize) ? "0rem" : "1rem"}
+            padding={isMobile(windowSize) ? "1rem" : "2rem"}q
             >
               {renderStepContent(activeStep)}
             </Box>
