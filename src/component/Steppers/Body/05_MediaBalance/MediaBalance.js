@@ -12,14 +12,14 @@ function MediaBalance() {
             </Box>
 
             <Box>
-                <Grid container gap={24}>
-                    <Grid > <SelectPrioritesToMemberFamilyComponent text='Planning a screen-free activity to do together as a family every day.' /> </Grid>
-                    <Grid > <SelectPrioritesToMemberFamilyComponent text='Planning a screen-free activity to do together as a family every day.'/> </Grid>
-                    <Grid > <SelectPrioritesToMemberFamilyComponent text='Planning a screen-free activity to do together as a family every day.'/> </Grid>
-                    <Grid > <SelectPrioritesToMemberFamilyComponent text='Planning a screen-free activity to do together as a family every day.'/> </Grid>
-                    <Grid > <SelectPrioritesToMemberFamilyComponent text='Planning a screen-free activity to do together as a family every day.'/> </Grid>
-                    <Grid > <SelectPrioritesToMemberFamilyComponent text='Planning a screen-free activity to do together as a family every day.'/> </Grid>
-                    <Grid > <SelectPrioritesToMemberFamilyComponent text='Planning a screen-free activity to do together as a family every day.'/> </Grid>
+                <Grid container gap={4}>
+                    <Grid item xs={12}> <SelectPrioritesToMemberFamilyComponent text='Planning a screen-free activity to do together as a family every day.' /> </Grid>
+                    <Grid item xs={12}> <SelectPrioritesToMemberFamilyComponent text='Planning a screen-free activity to do together as a family every day.'/> </Grid>
+                    <Grid item xs={12}> <SelectPrioritesToMemberFamilyComponent text='Planning a screen-free activity to do together as a family every day.'/> </Grid>
+                    <Grid item xs={12}> <SelectPrioritesToMemberFamilyComponent text='Planning a screen-free activity to do together as a family every day.'/> </Grid>
+                    <Grid item xs={12}> <SelectPrioritesToMemberFamilyComponent text='Planning a screen-free activity to do together as a family every day.'/> </Grid>
+                    <Grid item xs={12}> <SelectPrioritesToMemberFamilyComponent text='Planning a screen-free activity to do together as a family every day.'/> </Grid>
+                    <Grid item xs={12}> <SelectPrioritesToMemberFamilyComponent text='Planning a screen-free activity to do together as a family every day.'/> </Grid>
                 </Grid>
             </Box>
         </Box>

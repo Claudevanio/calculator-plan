@@ -1,11 +1,26 @@
 import { styled } from "@mui/material/styles";
 import Avatar from "@mui/material/Avatar";
-import { Badge } from "@mui/material";
+import { Badge, IconButton, ToggleButton } from "@mui/material";
 
 export const SmallAvatar = styled(Avatar)(({ theme }) => ({
   width: 22,
   height: 22,
   border: `2px solid ${theme.palette.background.paper}`,
+}));
+
+
+
+export const StyleIconButton = styled(IconButton)(({ theme }) => ({
+ "@media (min-width: 1024px)": {
+    display: "none",
+  },
+}));
+
+export const StyleToggleButton = styled(ToggleButton)(({ theme }) => ({
+  padding: '0.2rem',
+  "@media (min-width: 1024px)": {
+    padding: '1.5rem',
+  },
 }));
 
 export const StyledBadge = styled(Badge)(({ theme }) => ({

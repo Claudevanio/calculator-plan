@@ -6,6 +6,7 @@ import { CleaningServicesOutlined } from "@mui/icons-material";
 import { DeleteButton } from "./styles";
 import { useFamily } from "../../context/context";
 import FamilyMember from "../../entities/familyMember";
+import { StyleToggleButton } from "../AvatarWithBadge/styles";
 
 function FamiliyMemberComponent({ onDelete, internalId }) {
   const [age, setAge] = useState("");
@@ -53,30 +54,31 @@ function FamiliyMemberComponent({ onDelete, internalId }) {
             );
           }}
         />
-
+        <Box>
+        <Typography>Age</Typography> 
         <TextField id="name-member-input" value={name} onChange={handleName} label="Family Member's Name" />
+        </Box>
       </Stack>
 
       {/* TODO: adicionar bot"ao para remover o componente ao clicar aqui, deve ser o iconde  removeer... */}
-      <DeleteButton />
+      <DeleteButton  />
 
       <Box>
-        <Typography>Age</Typography>
-        <br />
+        <Typography>Age</Typography>       
         <ToggleButtonGroup
-          size="small"
+          sx={{height: '3.5rem'}}
           exclusive
           value={age}
           onChange={handleSelectAge}
         >
-          <ToggleButton value="0-24"> 0-24 months</ToggleButton>
-          <ToggleButton value="2-3"> 2-3 years</ToggleButton>
-          <ToggleButton value="6-12"> 6-12 yearss</ToggleButton>
-          <ToggleButton value="13-18"> 13-18 years</ToggleButton>
-          <ToggleButton value="adult"> Adult </ToggleButton>
+          <StyleToggleButton value="0-24"> 0-24 months</StyleToggleButton>
+          <StyleToggleButton value="2-3"> 2-3 years</StyleToggleButton>
+          <StyleToggleButton value="6-12"> 6-12 yearss</StyleToggleButton>
+          <StyleToggleButton value="13-18"> 13-18 years</StyleToggleButton>
+          <StyleToggleButton value="adult"> Adult </StyleToggleButton>
         </ToggleButtonGroup>
 
-        <IconButton aria-label="delete" onClick={onDelete}>
+        <IconButton aria-label="delete" onClick={onDelete} >
           <CleaningServicesOutlined color="error" fontSize="large" />
         </IconButton>
       </Box>

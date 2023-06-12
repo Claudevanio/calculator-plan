@@ -12,13 +12,13 @@ function Priorities() {
                 <Divider variant="middle" />
                 <Box>
                     <Grid container gap={8}>
-                        <Grid item xs={5}> <CheckBoxPriorites /> </Grid>
-                        <Grid item xs={5}> <CheckBoxPriorites /> </Grid>
-                        <Grid item xs={5}> <CheckBoxPriorites /> </Grid>
-                        <Grid item xs={5}> <CheckBoxPriorites /> </Grid>
-                        <Grid item xs={5}> <CheckBoxPriorites /> </Grid>
-                        <Grid item xs={5}> <CheckBoxPriorites /> </Grid>
-                        <Grid item xs={5}> <CheckBoxPriorites /> </Grid>
+                        <Grid item> <CheckBoxPriorites /> </Grid>
+                        <Grid item > <CheckBoxPriorites /> </Grid>
+                        <Grid item > <CheckBoxPriorites /> </Grid>
+                        <Grid item > <CheckBoxPriorites /> </Grid>
+                        <Grid item > <CheckBoxPriorites /> </Grid>
+                        <Grid item > <CheckBoxPriorites /> </Grid>
+                        <Grid item > <CheckBoxPriorites /> </Grid>
                     </Grid>
                 </Box>
                 <Divider variant="middle" />
