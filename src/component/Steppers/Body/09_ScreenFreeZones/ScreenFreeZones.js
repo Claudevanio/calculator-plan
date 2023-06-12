@@ -1,6 +1,6 @@
 import { Box, Grid, Typography } from "@mui/material";
 import CancelPresentationIcon from '@mui/icons-material/CancelPresentation';
-import SelectPrioritesToMemberFamilyComponent from "../../component/SelectPrioritesToMemberFamily/SelectPrioritesToMemberFamilyComponent";
+import SelectPrioritesToMemberFamilyComponent from "../../../SelectPrioritesToMemberFamily/SelectPrioritesToMemberFamilyComponent";
 
 
 function ScreenFreeZones() {

@@ -1,6 +1,6 @@
 import { Box, Grid, Typography } from "@mui/material";
 import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
-import SelectPrioritesToMemberFamilyComponent from "../../component/SelectPrioritesToMemberFamily/SelectPrioritesToMemberFamilyComponent";
+import SelectPrioritesToMemberFamilyComponent from "../../../SelectPrioritesToMemberFamily/SelectPrioritesToMemberFamilyComponent";
 
 
 function KindnessAndEmpathy() {

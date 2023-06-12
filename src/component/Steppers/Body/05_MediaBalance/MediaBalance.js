@@ -1,6 +1,6 @@
 import { Box,  Grid, Typography } from "@mui/material";
 import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
-import SelectPrioritesToMemberFamilyComponent from "../../component/SelectPrioritesToMemberFamily/SelectPrioritesToMemberFamilyComponent";
+import SelectPrioritesToMemberFamilyComponent from "../../../SelectPrioritesToMemberFamily/SelectPrioritesToMemberFamilyComponent";
 
 
 function MediaBalance() {

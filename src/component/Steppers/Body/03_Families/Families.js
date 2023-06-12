@@ -7,8 +7,8 @@ import {
     Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { useFamily } from "../../context/context";
-import FamiliyMemberComponent from "../../component/FamileMember/FamileMemberComponent";
+import FamiliyMemberComponent from "../../../FamileMember/FamileMemberComponent";
+import { useFamily } from "../../../../context/context";
 
 const generateId = () => Math.random() * 10_000_000
 

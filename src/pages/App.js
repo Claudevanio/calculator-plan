@@ -8,21 +8,22 @@ import DrawerComponent from '../component/Drawer/Drawer';
 import SettingsIcon from "@mui/icons-material/Settings";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import VideoLabelIcon from "@mui/icons-material/VideoLabel";
-import Priorities from './Priorites/Priorites';
-import MediaBalance from './MediaBalance/MediaBalance';
-import CommunicatingAboutMedia from './CommunicatingAboutMedia/CommunicatingAboutMedia';
-import KindnessAndEmpathy from './KindnessAndEmpathy/KindnessAndEmpathy';
-import DigitalPrivacy from './DigitalPrivacy/DigitalPrivacy';
-import ScreenFreeZones from './ScreenFreeZones/ScreenFreeZones';
-import ScreenFreeTimes from './ScreenFreeTimes/ScreenFreeTimes';
-import ChoosingGoodContent from '../component/Steppers/Body/ChoosingGoodContent/ChoosingGoodContent';
-import UsingMediaTogether from './UsingMediaTogether/UsingMediaTogether';
-import Families from './Families/Families';
-import Tutorial from './Tutorial/Tutorial'
 
 import { FamilyContextProvider } from '../context/context';
 import { useWindowSize } from '../hooks/useWindowSize';
 import { useState } from 'react';
+import Tutorial from '../component/Steppers/Body/02_Tutorial/Tutorial';
+import Families from '../component/Steppers/Body/03_Families/Families';
+import Priorities from '../component/Steppers/Body/04_Priorites/Priorites';
+import MediaBalance from '../component/Steppers/Body/05_MediaBalance/MediaBalance';
+import CommunicatingAboutMedia from '../component/Steppers/Body/06_CommunicatingAboutMedia/CommunicatingAboutMedia';
+import KindnessAndEmpathy from '../component/Steppers/Body/07_KindnessAndEmpathy/KindnessAndEmpathy';
+import DigitalPrivacy from '../component/Steppers/Body/08_DigitalPrivacy/DigitalPrivacy';
+import ScreenFreeZones from '../component/Steppers/Body/09_ScreenFreeZones/ScreenFreeZones';
+import ScreenFreeTimes from '../component/Steppers/Body/10_ScreenFreeTimes/ScreenFreeTimes';
+import ChoosingGoodContent from '../component/Steppers/Body/11_ChoosingGoodContent/ChoosingGoodContent';
+import UsingMediaTogether from '../component/Steppers/Body/12_UsingMediaTogether/UsingMediaTogether';
+import Review from '../component/Steppers/Body/13_Review/Review';
 
 function App(props) {
 
@@ -137,7 +138,7 @@ function App(props) {
             case 11:
                 return <FamilyContextProvider> <UsingMediaTogether /></FamilyContextProvider>;
             case 12:
-                return <FamilyContextProvider> <UsingMediaTogether /></FamilyContextProvider>;
+                return <FamilyContextProvider> <Review /></FamilyContextProvider>;
             default:
                 return null;
         }
@@ -330,13 +331,10 @@ function App(props) {
                             </Box>
                         </Box>
                     </Box>
-
                 </Box>
             </Box>
         </ Container>
-
     );
-
 }
 
 

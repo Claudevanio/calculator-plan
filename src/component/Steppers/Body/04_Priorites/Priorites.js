@@ -1,6 +1,5 @@
 import { Box, Button, Divider, Grid, Stack, TextField, Typography } from "@mui/material";
-import FamiliyMemberComponent from "../../component/FamileMember/FamileMemberComponent";
-import CheckBoxPriorites from "../../component/CheckBoxPriorites/CheckBoxPrioritesComponent";
+import CheckBoxPriorites from "../../../CheckBoxPriorites/CheckBoxPrioritesComponent";
 
 
 function Priorities() {
