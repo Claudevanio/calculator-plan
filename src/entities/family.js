@@ -14,8 +14,8 @@ class Family {
       this.hasUsingMediaTogether = true;
     }
   
-    addFamilyMember(id, nameMember) {
-      const member = new FamilyMember(id, nameMember);
+    addFamilyMember(id, nameMember, age) {
+      const member = new FamilyMember(id, nameMember, age);
       this.familyMembers.push(member);
     }
   }

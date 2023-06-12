@@ -1,8 +1,8 @@
 class FamilyMember {
-    constructor(id, nameMember) {
+    constructor(id, nameMember, age) {
       this.id = id;
       this.nameMember = nameMember;
-      this.age = null;
+      this.age = age;
       this.mediaBalance = [];
       this.communicatingAboutMedia = [];
       this.kindnessEmpathy = [];
