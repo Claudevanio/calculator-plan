@@ -24,6 +24,7 @@ import ScreenFreeTimes from '../component/Steppers/Body/10_ScreenFreeTimes/Scree
 import ChoosingGoodContent from '../component/Steppers/Body/11_ChoosingGoodContent/ChoosingGoodContent';
 import UsingMediaTogether from '../component/Steppers/Body/12_UsingMediaTogether/UsingMediaTogether';
 import Review from '../component/Steppers/Body/13_Review/Review';
+import { useWindowSize } from '../hooks/useWindowSize';
 
 function App(props) {
 
@@ -219,11 +220,9 @@ function App(props) {
     const isMobile = (windowSize) => windowSize.width <= DESKTOP_SMALL_SIZE;
 
 
-
     return (
-
-        <Container maxWidth='70rem'>
-            <Box >
+     
+            <Box>
                 <Box sx={{ display: 'flex' }}>
                     <CssBaseline />
                     <AppBar component="nav">

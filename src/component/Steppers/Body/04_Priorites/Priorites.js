@@ -11,7 +11,6 @@ function Priorities() {
                 </Button>
                 <Divider variant="middle" />
                 <Box>
-
                     <Grid container gap={8}>
                         <Grid item xs={5}> <CheckBoxPriorites /> </Grid>
                         <Grid item xs={5}> <CheckBoxPriorites /> </Grid>
