@@ -1,16 +1,16 @@
 import { Box, IconButton, Stack, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { AvatarWithBadge } from "../AvatarWithBadge";
 import { CleaningServicesOutlined } from "@mui/icons-material";
 import { DeleteButton } from "./styles";
-import { useFamily } from "../../context/context";
 import FamilyMember from "../../entities/familyMember";
+import { useFamily } from "../../context/context";
 
-function FamiliyMemberComponent({ onDelete, internalId }) {
+function FamiliyMemberComponent({ onDelete, id }) {
+  const { setMembers, members, hasThisFamilyMember } = useFamily();
   const [age, setAge] = useState("");
   const [name, setName] = useState("");
-  const { family } = useFamily();
 
   const windowSize = useWindowSize();
 
@@ -18,20 +18,36 @@ function FamiliyMemberComponent({ onDelete, internalId }) {
   const isMobile = (windowSize) => windowSize.width <= DESKTOP_SMALL_SIZE;
 
   const handleSelectAge = (event, newAge) => {
-    debugger
     setAge(newAge);
-    console.log(age)
   };
 
   const handleName = (e) => {
     setName(e.target.value);
   };
 
-  const addMemberFamily = () => {
-    const member = new FamilyMember(internalId, name, age)
-    console(member);
-    // Faça o que for necessário com o objeto criado
+  const addFamilyMember = () => {
+    const newMember = new FamilyMember(id, name, age)
+    const hasId = hasThisFamilyMember(id);
+
+    if (hasId) {
+      let updatedMembers = members.map((member) => {
+        if (member.id == id) {
+          return { ...member, ...newMember }
+        }
+        return member
+      })
+      setMembers(updatedMembers);
+    } else {
+      members.push(newMember)
+    }
   };
+
+ 
+
+  useEffect(() => {
+    addFamilyMember();
+    console.log(members)
+  }, [age]); 
 
   return (
     <Box
@@ -54,7 +70,7 @@ function FamiliyMemberComponent({ onDelete, internalId }) {
           }}
         />
 
-        <TextField id="name-member-input" value={name} onChange={handleName} label="Family Member's Name" />
+        <TextField id="name-member-input" value={name} onBlur={addFamilyMember} onChange={handleName} label="Family Member's Name" />
       </Stack>
 
       {/* TODO: adicionar bot"ao para remover o componente ao clicar aqui, deve ser o iconde  removeer... */}

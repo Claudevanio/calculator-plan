@@ -7,7 +7,8 @@ export const useFamily = () => useContext(FamilyContext);
 
 export function FamilyContextProvider({ children }) {
     const [family, setFamily] = useState({})
-    const [members, setMember] = useState([])
+    const [members, setMembers] = useState([])
+    const [idMembers, setIdMembers] = useState(1);
 
     const createFamily = (nameFamily) => {
         const familyModel = new Family(nameFamily);
@@ -15,10 +16,16 @@ export function FamilyContextProvider({ children }) {
         setFamily(familyModel);
     }
 
-    const AddFamilyMember = (id, nameMember) => {
-        if(members) 
-        family.AddFamilyMember(id, nameMember)
+    const hasThisFamilyMember = (id) => {
+        for (let i = 0; i < members.length; i++) {
+            if (members[i].id === id) {
+                return true;
+            }
+        }
+        return false;
     }
+
+
 
 
     useEffect(() => {
@@ -28,8 +35,12 @@ export function FamilyContextProvider({ children }) {
         <FamilyContext.Provider
             value={{
                 family,
+                members,
+                setMembers,
                 createFamily,
-                AddFamilyMember
+                hasThisFamilyMember,
+                idMembers,
+                setIdMembers
             }}
         >
             {children}

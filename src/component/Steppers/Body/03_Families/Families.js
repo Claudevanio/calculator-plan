@@ -13,8 +13,9 @@ import { useFamily } from "../../../../context/context";
 const generateId = () => Math.random() * 10_000_000
 
 function Families() {
-    const { createFamily } = useFamily();
+    const { createFamily, setMembers } = useFamily();
     const [familyMembers, setFamilyMembers] = useState([{ internalId: generateId() }, { internalId: generateId() }]);
+
 
     const handleCreateFamily = (event) => {
         event.preventDefault();
@@ -29,7 +30,10 @@ function Families() {
     };
 
     const handleDeleteMemberFamily = (member) => {
-        if (familyMembers.length > 1) setFamilyMembers((prevMembers) => prevMembers.filter((prevMember) => prevMember.internalId !== member.internalId));
+        if (familyMembers.length > 1)
+            setFamilyMembers((prevMembers) => prevMembers.filter((prevMember) => prevMember.internalId !== member.internalId));
+
+        setMembers((prevMembers) => prevMembers.filter((prevMember) => prevMember.id !== member.internalId));
     };
 
     return (
@@ -47,7 +51,7 @@ function Families() {
             <Box>
                 {familyMembers.map((member, index) => (
                     <Box mb={2} key={member.internalId}>
-                        <FamiliyMemberComponent internalId={member.internalId} onDelete={() => handleDeleteMemberFamily(member)} />
+                        <FamiliyMemberComponent id={member.internalId} onDelete={() => handleDeleteMemberFamily(member)} />
                     </Box>
                 ))}
             </Box>
