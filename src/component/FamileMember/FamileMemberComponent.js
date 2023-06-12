@@ -1,4 +1,12 @@
-import { Box, IconButton, Stack, TextField, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  Stack,
+  TextField,
+  ToggleButton,
+  ToggleButtonGroup,
+  Typography,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { AvatarWithBadge } from "../AvatarWithBadge";
@@ -9,45 +17,57 @@ import { useFamily } from "../../context/context";
 
 function FamiliyMemberComponent({ onDelete, id }) {
   const { setMembers, members, hasThisFamilyMember } = useFamily();
-  const [age, setAge] = useState("");
-  const [name, setName] = useState("");
+  const [familyMember, setFamilyMember] = useState({ nameMember: "", age: "" });
+
+  const getDataMembers = () => {
+    const currentMember = members.find((member) => member.id === id);
+    console.log(currentMember);
+    if (currentMember) {
+      setFamilyMember(currentMember);
+    }
+  };
 
   const windowSize = useWindowSize();
 
   const DESKTOP_SMALL_SIZE = 1023;
   const isMobile = (windowSize) => windowSize.width <= DESKTOP_SMALL_SIZE;
 
-  const handleSelectAge = (event, newAge) => {
-    setAge(newAge);
-  };
-
-  const handleName = (e) => {
-    setName(e.target.value);
+  const handleInputChange = (field, value) => {
+    setFamilyMember((prevMember) => ({ ...prevMember, [field]: value }));
   };
 
   const addFamilyMember = () => {
-    const newMember = new FamilyMember(id, name, age)
+    const newMember = new FamilyMember(
+      id,
+      familyMember.nameMember,
+      familyMember.age
+    );
     const hasId = hasThisFamilyMember(id);
 
-    if (hasId) {
-      let updatedMembers = members.map((member) => {
-        if (member.id == id) {
-          return { ...member, ...newMember }
-        }
-        return member
-      })
-      setMembers(updatedMembers);
-    } else {
-      members.push(newMember)
+    if (!hasId) {
+      members.push(newMember);
+      return;
     }
-  };
 
- 
+    let updatedMembers = members.map((member) => {
+      if (member.id == id) {
+        return { ...member, ...newMember };
+      }
+      return member;
+    });
+    setMembers(
+      updatedMembers
+      //localStorage.setItem('familyMembers', members.toString())
+    );
+  };
 
   useEffect(() => {
     addFamilyMember();
-    console.log(members)
-  }, [age]); 
+  }, [familyMember.age]);
+
+  useEffect(() => {
+    getDataMembers();
+  }, []);
 
   return (
     <Box
@@ -70,7 +90,13 @@ function FamiliyMemberComponent({ onDelete, id }) {
           }}
         />
 
-        <TextField id="name-member-input" value={name} onBlur={addFamilyMember} onChange={handleName} label="Family Member's Name" />
+        <TextField
+          id="name-member-input"
+          value={familyMember.nameMember}
+          onBlur={addFamilyMember}
+          onChange={(e) => handleInputChange("nameMember", e.currentTarget?.value)}
+          label="Family Member's Name"
+        />
       </Stack>
 
       {/* TODO: adicionar bot"ao para remover o componente ao clicar aqui, deve ser o iconde  removeer... */}
@@ -82,8 +108,8 @@ function FamiliyMemberComponent({ onDelete, id }) {
         <ToggleButtonGroup
           size="small"
           exclusive
-          value={age}
-          onChange={handleSelectAge}
+          value={familyMember.age}
+          onChange={(_, value) => handleInputChange("age", value)}
         >
           <ToggleButton value="0-24"> 0-24 months</ToggleButton>
           <ToggleButton value="2-3"> 2-3 years</ToggleButton>

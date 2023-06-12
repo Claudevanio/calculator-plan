@@ -1,23 +1,24 @@
-import * as React from 'react';
+import * as React from "react";
 import { Box, Checkbox, Stack, Typography } from "@mui/material";
 
+function CheckBoxPriorites({ text, title, isChecked, onSelect }) {
 
-function CheckBoxPriorites() {
+    const handleCheckboxChange = (event) => {
+        const value = event.target.checked;
+        onSelect(value);
+      };
 
-
-    return (
-        <Box  >
-            <Stack direction='row' alignItems='start'>
-                <Checkbox defaultChecked />
-                <Stack>
-                    <Typography variant='h4'> Media Balance</Typography>
-                    <Typography variant='h6'> Whether at home, school or work, we are surrounded by media and digital devices. At the same time, we know that face-to-face time with family, friends and teachers is important to a child’s learning and healthy development.</Typography>
-                </Stack>
-            </Stack>
-
-        </Box>
-    );
-
+  return (
+    <Box>
+      <Stack direction="row" alignItems="start">
+        <Checkbox checked={isChecked} onChange={handleCheckboxChange} />
+        <Stack>
+          <Typography variant="h4"> {title}</Typography>
+          <Typography variant="h6">{text}</Typography>
+        </Stack>
+      </Stack>
+    </Box>
+  );
 }
 
 export default CheckBoxPriorites;

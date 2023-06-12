@@ -6,15 +6,14 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
-import { useState } from "react";
 import FamiliyMemberComponent from "../../../FamileMember/FamileMemberComponent";
 import { useFamily } from "../../../../context/context";
 
-const generateId = () => Math.random() * 10_000_000
+
 
 function Families() {
-    const { createFamily, setMembers } = useFamily();
-    const [familyMembers, setFamilyMembers] = useState([{ internalId: generateId() }, { internalId: generateId() }]);
+    const { createFamily, setMembers, countFamilyMembersComponent, setCountFamilyMembersComponent, generateId } = useFamily();
+
 
 
     const handleCreateFamily = (event) => {
@@ -24,14 +23,14 @@ function Families() {
     };
 
     const handleCreateMemberFamilyComponent = () => {
-        setFamilyMembers((prevMembers) => [...prevMembers, {
+        setCountFamilyMembersComponent((prevMembers) => [...prevMembers, {
             internalId: generateId()
         }]);
     };
 
     const handleDeleteMemberFamily = (member) => {
-        if (familyMembers.length > 1)
-            setFamilyMembers((prevMembers) => prevMembers.filter((prevMember) => prevMember.internalId !== member.internalId));
+        if (countFamilyMembersComponent.length > 1)
+            setCountFamilyMembersComponent((prevMembers) => prevMembers.filter((prevMember) => prevMember.internalId !== member.internalId));
 
         setMembers((prevMembers) => prevMembers.filter((prevMember) => prevMember.id !== member.internalId));
     };
@@ -49,7 +48,7 @@ function Families() {
             </Box>
 
             <Box>
-                {familyMembers.map((member, index) => (
+                {countFamilyMembersComponent.map((member, index) => (
                     <Box mb={2} key={member.internalId}>
                         <FamiliyMemberComponent id={member.internalId} onDelete={() => handleDeleteMemberFamily(member)} />
                     </Box>

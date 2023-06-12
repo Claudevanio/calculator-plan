@@ -5,10 +5,13 @@ export const FamilyContext = createContext({});
 
 export const useFamily = () => useContext(FamilyContext);
 
+const generateId = () => Math.random() * 10_000_000
+
 export function FamilyContextProvider({ children }) {
     const [family, setFamily] = useState({})
     const [members, setMembers] = useState([])
     const [idMembers, setIdMembers] = useState(1);
+    const [countFamilyMembersComponent, setCountFamilyMembersComponent] = useState([{ internalId: generateId() }, { internalId: generateId() }]);
 
     const createFamily = (nameFamily) => {
         const familyModel = new Family(nameFamily);
@@ -17,12 +20,7 @@ export function FamilyContextProvider({ children }) {
     }
 
     const hasThisFamilyMember = (id) => {
-        for (let i = 0; i < members.length; i++) {
-            if (members[i].id === id) {
-                return true;
-            }
-        }
-        return false;
+        return members.find((member) => member.id === id)
     }
 
 
@@ -36,11 +34,15 @@ export function FamilyContextProvider({ children }) {
             value={{
                 family,
                 members,
+                idMembers,
+                countFamilyMembersComponent,
                 setMembers,
                 createFamily,
                 hasThisFamilyMember,
-                idMembers,
-                setIdMembers
+                setIdMembers,
+                setCountFamilyMembersComponent,
+                generateId,
+                setFamily
             }}
         >
             {children}
