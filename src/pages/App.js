@@ -24,6 +24,7 @@ import ScreenFreeTimes from '../component/Steppers/Body/10_ScreenFreeTimes/Scree
 import ChoosingGoodContent from '../component/Steppers/Body/11_ChoosingGoodContent/ChoosingGoodContent';
 import UsingMediaTogether from '../component/Steppers/Body/12_UsingMediaTogether/UsingMediaTogether';
 import Review from '../component/Steppers/Body/13_Review/Review';
+import { StyleButtonLeft, StyleButtonRight, StyleTypographyLeft, StyleTypographyRight } from '../component/AvatarWithBadge/styles';
 
 function App(props) {
 
@@ -269,8 +270,7 @@ function App(props) {
                         </Drawer>
                     </Box>
 
-                    <Box 
-                    marginTop={isMobile(windowSize) ? "3rem" : "8rem"}>
+                    <Box marginTop={isMobile(windowSize) ? "3rem" : "8rem"}>
                         <Box>
                             <Box
                                 sx={{ background: "white" }}
@@ -293,17 +293,38 @@ function App(props) {
                                                 </Step>
                                             ))}
                                         </Stepper>
-
-                                        <Button
+                                        <Box sx={{display:'flex', justifyContent:'space-between'}}>
+                                        <StyleButtonLeft
+                                            display = {activeStep === 0? "none" : ""}
                                             disabled={activeStep === 0}
                                             onClick={handleBack}
                                             sx={{ mr: 1 }}
                                         >
-                                            Back
-                                        </Button>
-                                        <Button variant="contained" onClick={handleNext}>
-                                            {activeStep === steps.length - 1 ? "Finish" : "Next"}
-                                        </Button>
+                                        <StyleTypographyLeft>
+                                            <Box>
+                                                <Typography>
+                                                    Back
+                                                </Typography>
+                                                <Typography>
+                                                    {activeStep} of {steps.length}
+                                                </Typography>
+                                            </Box> 
+                                        </StyleTypographyLeft>
+                                        </StyleButtonLeft>
+
+                                        <StyleButtonRight variant="contained" onClick={handleNext}>
+                                            <StyleTypographyRight>
+                                                <Box>
+                                                    <Typography>
+                                                        {activeStep === steps.length - 1 ? "Finish" : "Continue"}
+                                                    </Typography>
+                                                    <Typography>
+                                                        {activeStep + 1} of {steps.length}
+                                                    </Typography>
+                                                </Box>    
+                                            </StyleTypographyRight>
+                                        </StyleButtonRight>
+                                        </Box>        
                                     </Box>
                                 </Box>
 

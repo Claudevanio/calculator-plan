@@ -91,6 +91,8 @@ function FamiliyMemberComponent({ onDelete, id }) {
           }}
         />
 
+        <Box>
+        <Typography>Family Member's Name</Typography>
         <TextField
           id="name-member-input"
           value={familyMember.nameMember}
@@ -98,6 +100,7 @@ function FamiliyMemberComponent({ onDelete, id }) {
           onChange={(e) => handleInputChange("nameMember", e.currentTarget?.value)}
           label="Family Member's Name"
         />
+        </Box>
       </Stack>
 
       {/* TODO: adicionar bot"ao para remover o componente ao clicar aqui, deve ser o iconde  removeer... */}
