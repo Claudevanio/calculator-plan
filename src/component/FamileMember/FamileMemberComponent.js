@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   IconButton,
   Stack,
   TextField,
@@ -11,10 +12,11 @@ import { useEffect, useState } from "react";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { AvatarWithBadge } from "../AvatarWithBadge";
 import { CleaningServicesOutlined } from "@mui/icons-material";
-import { DeleteButton } from "./styles";
+import { DeleteButton, DeleteButtonDesktop } from "./styles";
 import FamilyMember from "../../entities/familyMember";
 import { useFamily } from "../../context/context";
 import { StyleToggleButton } from "../AvatarWithBadge/styles";
+import ClearIcon from '@mui/icons-material/Clear';
 
 function FamiliyMemberComponent({ onDelete, id }) {
   const { setMembers, members, hasThisFamilyMember } = useFamily();
@@ -104,8 +106,10 @@ function FamiliyMemberComponent({ onDelete, id }) {
       </Stack>
 
       {/* TODO: adicionar bot"ao para remover o componente ao clicar aqui, deve ser o iconde  removeer... */}
-      <DeleteButton  />
-
+      <DeleteButton aria-label="delete" onClick={onDelete} >
+          <ClearIcon color="error" fontSize="large" />
+      </DeleteButton>
+          
       <Box>
         <Typography>Age</Typography>       
         <ToggleButtonGroup
@@ -121,9 +125,9 @@ function FamiliyMemberComponent({ onDelete, id }) {
           <StyleToggleButton value="adult"> Adult </StyleToggleButton>
         </ToggleButtonGroup>
 
-        <IconButton aria-label="delete" onClick={onDelete} >
+        <DeleteButtonDesktop flexDirection={isMobile(windowSize) ? "column" : "row"} aria-label="delete" onClick={onDelete} >
           <CleaningServicesOutlined color="error" fontSize="large" />
-        </IconButton>
+        </DeleteButtonDesktop>
       </Box>
     </Box>
   );
