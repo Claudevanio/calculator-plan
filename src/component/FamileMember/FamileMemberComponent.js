@@ -17,12 +17,11 @@ import { useFamily } from "../../context/context";
 import { StyleToggleButton } from "../AvatarWithBadge/styles";
 
 function FamiliyMemberComponent({ onDelete, id }) {
-  const { setMembers, members, hasThisFamilyMember } = useFamily();
+  const {setMembers, members, hasThisFamilyMember } = useFamily();
   const [familyMember, setFamilyMember] = useState({ nameMember: "", age: "" });
 
   const getDataMembers = () => {
     const currentMember = members.find((member) => member.id === id);
-    console.log(currentMember);
     if (currentMember) {
       setFamilyMember(currentMember);
     }
@@ -62,6 +61,8 @@ function FamiliyMemberComponent({ onDelete, id }) {
     );
   };
 
+ 
+
   useEffect(() => {
     addFamilyMember();
   }, [familyMember.age]);
@@ -92,24 +93,26 @@ function FamiliyMemberComponent({ onDelete, id }) {
         />
 
         <Box>
-        <Typography>Family Member's Name</Typography>
-        <TextField
-          id="name-member-input"
-          value={familyMember.nameMember}
-          onBlur={addFamilyMember}
-          onChange={(e) => handleInputChange("nameMember", e.currentTarget?.value)}
-          label="Family Member's Name"
-        />
+          <Typography>Family Member's Name</Typography>
+          <TextField
+            id="name-member-input"
+            value={familyMember.nameMember}
+            onBlur={addFamilyMember}
+            onChange={(e) =>
+              handleInputChange("nameMember", e.currentTarget?.value)
+            }
+            label="Family Member's Name"
+          />
         </Box>
       </Stack>
 
       {/* TODO: adicionar bot"ao para remover o componente ao clicar aqui, deve ser o iconde  removeer... */}
-      <DeleteButton  />
+      <DeleteButton />
 
       <Box>
-        <Typography>Age</Typography>       
+        <Typography>Age</Typography>
         <ToggleButtonGroup
-          sx={{height: '3.5rem'}}
+          sx={{ height: "3.5rem" }}
           exclusive
           value={familyMember.age}
           onChange={(_, value) => handleInputChange("age", value)}
@@ -121,7 +124,7 @@ function FamiliyMemberComponent({ onDelete, id }) {
           <StyleToggleButton value="adult"> Adult </StyleToggleButton>
         </ToggleButtonGroup>
 
-        <IconButton aria-label="delete" onClick={onDelete} >
+        <IconButton aria-label="delete" onClick={onDelete}>
           <CleaningServicesOutlined color="error" fontSize="large" />
         </IconButton>
       </Box>

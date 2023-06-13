@@ -12,7 +12,7 @@ import { useFamily } from "../../../../context/context";
 
 
 function Families() {
-    const { createFamily, setMembers, countFamilyMembersComponent, setCountFamilyMembersComponent, generateId } = useFamily();
+    const { family, createFamily, setMembers, countFamilyMembersComponent, setCountFamilyMembersComponent, generateId } = useFamily();
 
 
 
@@ -39,7 +39,7 @@ function Families() {
         <Stack>
 
             <Box container justifyContent={'center'} display={"flex"} marginBottom={4}>
-                <TextField id="outlined-basic" onChange={handleCreateFamily} label="Enter your family name" sx={{ mt: "2rem" }} />
+                <TextField id="outlined-basic" value={family.familyName} onChange={handleCreateFamily} label="Enter your family name" sx={{ mt: "2rem" }} />
             </Box>
             <Divider variant="middle" />
             <Box margin={2}>
