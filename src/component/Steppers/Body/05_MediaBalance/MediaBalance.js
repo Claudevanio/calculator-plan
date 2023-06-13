@@ -20,7 +20,6 @@ function MediaBalance() {
                     <Grid item xs={12}> <SelectPrioritesToMemberFamilyComponent text='Planning a screen-free activity to do together as a family every day.'/> </Grid>
                     <Grid item xs={12}> <SelectPrioritesToMemberFamilyComponent text='Planning a screen-free activity to do together as a family every day.'/> </Grid>
                     <Grid item xs={12}> <SelectPrioritesToMemberFamilyComponent text='Planning a screen-free activity to do together as a family every day.'/> </Grid>
-
                 </Grid>
             </Box>
         </Box>

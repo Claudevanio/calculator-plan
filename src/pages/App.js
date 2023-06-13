@@ -177,7 +177,7 @@ function App(props) {
     };
 
     const getVisibleSteps = (recuoStep, avancoStep) => {
-        if (windowSize < 600) {
+        if (isMobile(windowSize)) {
             return steps.slice(0, 3);
         } else {
             return steps;
@@ -220,9 +220,7 @@ function App(props) {
 
 
 
-    return (
-
-        <Container maxWidth='70rem'>
+    return (        
             <Box >
                 <Box sx={{ display: 'flex' }}>
                     <CssBaseline />
@@ -310,7 +308,9 @@ function App(props) {
 
                                 <Box>
                                     <Box
-                                        sx={{ padding: "2rem", marginLeft: "1rem", marginRight: "1rem" }}
+                                    padding={isMobile(windowSize) ? "1rem" : "2rem"}
+                                    marginLeft={isMobile(windowSize) ? "" : "1rem"}
+                                    marginRight={isMobile(windowSize) ? "" : "1rem"}                                        
                                     >
                                         {renderStepContent(activeStep)}
                                     </Box>
@@ -332,8 +332,7 @@ function App(props) {
                         </Box>
                     </Box>
                 </Box>
-            </Box>
-        </ Container>
+            </Box>    
     );
 }
 

@@ -14,6 +14,7 @@ import { CleaningServicesOutlined } from "@mui/icons-material";
 import { DeleteButton } from "./styles";
 import FamilyMember from "../../entities/familyMember";
 import { useFamily } from "../../context/context";
+import { StyleToggleButton } from "../AvatarWithBadge/styles";
 
 function FamiliyMemberComponent({ onDelete, id }) {
   const { setMembers, members, hasThisFamilyMember } = useFamily();
@@ -100,13 +101,12 @@ function FamiliyMemberComponent({ onDelete, id }) {
       </Stack>
 
       {/* TODO: adicionar bot"ao para remover o componente ao clicar aqui, deve ser o iconde  removeer... */}
-      <DeleteButton />
+      <DeleteButton  />
 
       <Box>
-        <Typography>Age</Typography>
-        <br />
+        <Typography>Age</Typography>       
         <ToggleButtonGroup
-          size="small"
+          sx={{height: '3.5rem'}}
           exclusive
           value={familyMember.age}
           onChange={(_, value) => handleInputChange("age", value)}
@@ -118,7 +118,7 @@ function FamiliyMemberComponent({ onDelete, id }) {
           <ToggleButton value="adult"> Adult </ToggleButton>
         </ToggleButtonGroup>
 
-        <IconButton aria-label="delete" onClick={onDelete}>
+        <IconButton aria-label="delete" onClick={onDelete} >
           <CleaningServicesOutlined color="error" fontSize="large" />
         </IconButton>
       </Box>
