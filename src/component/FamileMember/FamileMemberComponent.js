@@ -91,6 +91,8 @@ function FamiliyMemberComponent({ onDelete, id }) {
           }}
         />
 
+        <Box>
+        <Typography>Family Member's Name</Typography>
         <TextField
           id="name-member-input"
           value={familyMember.nameMember}
@@ -98,6 +100,7 @@ function FamiliyMemberComponent({ onDelete, id }) {
           onChange={(e) => handleInputChange("nameMember", e.currentTarget?.value)}
           label="Family Member's Name"
         />
+        </Box>
       </Stack>
 
       {/* TODO: adicionar bot"ao para remover o componente ao clicar aqui, deve ser o iconde  removeer... */}
@@ -111,11 +114,11 @@ function FamiliyMemberComponent({ onDelete, id }) {
           value={familyMember.age}
           onChange={(_, value) => handleInputChange("age", value)}
         >
-          <ToggleButton value="0-24"> 0-24 months</ToggleButton>
-          <ToggleButton value="2-3"> 2-3 years</ToggleButton>
-          <ToggleButton value="6-12"> 6-12 yearss</ToggleButton>
-          <ToggleButton value="13-18"> 13-18 years</ToggleButton>
-          <ToggleButton value="adult"> Adult </ToggleButton>
+          <StyleToggleButton value="0-24"> 0-24 months</StyleToggleButton>
+          <StyleToggleButton value="2-3"> 2-3 years</StyleToggleButton>
+          <StyleToggleButton value="6-12"> 6-12 yearss</StyleToggleButton>
+          <StyleToggleButton value="13-18"> 13-18 years</StyleToggleButton>
+          <StyleToggleButton value="adult"> Adult </StyleToggleButton>
         </ToggleButtonGroup>
 
         <IconButton aria-label="delete" onClick={onDelete} >

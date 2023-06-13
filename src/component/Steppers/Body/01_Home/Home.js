@@ -5,7 +5,6 @@ import { Button, Typography } from '@mui/material';
 
 
 function Home() {
-
     return (
         <Box>
             <Stack sx={{ marginTop: '5rem', marginRight: '5rem', marginLeft: '5rem', background: 'gray' }} spacing={4}>

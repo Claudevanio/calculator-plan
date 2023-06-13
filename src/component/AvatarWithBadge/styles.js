@@ -1,6 +1,6 @@
 import { styled } from "@mui/material/styles";
 import Avatar from "@mui/material/Avatar";
-import { Badge, IconButton, ToggleButton } from "@mui/material";
+import { Badge, Button, Grid, IconButton, ToggleButton, Typography } from "@mui/material";
 
 export const SmallAvatar = styled(Avatar)(({ theme }) => ({
   width: 22,
@@ -9,12 +9,54 @@ export const SmallAvatar = styled(Avatar)(({ theme }) => ({
 }));
 
 
+export const StyleButtonLeft = styled(Button)(({theme}) => ({
+  position: 'flex',
+  right: '9.1%',
+  height: '100px',
+  width: '200px',
+  borderRadius: '150px 150px 0 0',
+  backgroundColor: 'green',
+  msTransform: 'rotate(-90deg)', 
+  webkitTransform: 'rotate(-90deg)', 
+  transform: 'rotate(-90deg)'
+}))
+
+export const StyleTypographyLeft = styled(Typography)(({theme}) => ({   
+  transform: 'rotate(90deg)'
+}))
+
+
+export const StyleButtonRight = styled(Button)(({theme}) => ({
+  position: 'flex',
+  left: '9.1%',
+  height: '100px',
+  width: '200px',
+  borderRadius: '150px 150px 0 0',
+  backgroundColor: 'green',
+  msTransform: 'rotate(90deg)', 
+  webkitTransform: 'rotate(90deg)', 
+  transform: 'rotate(90deg)'
+}))
+
+export const StyleTypographyRight = styled(Typography)(({theme}) => ({
+  display:'grid',
+ transform: 'rotate(-90deg)'
+}))
+
 
 export const StyleIconButton = styled(IconButton)(({ theme }) => ({
  "@media (min-width: 1024px)": {
     display: "none",
   },
 }));
+
+export const StyleGrid= styled(Grid)(({ theme }) => ({
+ 
+  "@media (min-width: 1024px)": {
+    width: '40rem',
+  },
+}));
+
 
 export const StyleToggleButton = styled(ToggleButton)(({ theme }) => ({
   padding: '0.2rem',
