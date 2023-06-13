@@ -25,6 +25,7 @@ import ChoosingGoodContent from '../component/Steppers/Body/11_ChoosingGoodConte
 import UsingMediaTogether from '../component/Steppers/Body/12_UsingMediaTogether/UsingMediaTogether';
 import Review from '../component/Steppers/Body/13_Review/Review';
 import { StyleButtonLeft, StyleButtonRight, StyleTypographyLeft, StyleTypographyRight } from '../component/AvatarWithBadge/styles';
+import Home from '../component/Steppers/Body/01_Home/Home';
 
 function App(props) {
 
@@ -360,7 +361,10 @@ function App(props) {
 
 
 const Step1Component = () => {
-    return <div>Step 1 Content</div>;
+    return (
+        <Home>           
+        </Home>
+    );
 };
 
 const Step1ComponentHeader = () => {
