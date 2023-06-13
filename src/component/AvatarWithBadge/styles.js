@@ -1,6 +1,6 @@
 import { styled } from "@mui/material/styles";
 import Avatar from "@mui/material/Avatar";
-import { Badge, Button, Grid, IconButton, ToggleButton, Typography } from "@mui/material";
+import { Badge, Box, Button, Grid, IconButton, ToggleButton, Typography } from "@mui/material";
 
 export const SmallAvatar = styled(Avatar)(({ theme }) => ({
   width: 22,
@@ -10,25 +10,54 @@ export const SmallAvatar = styled(Avatar)(({ theme }) => ({
 
 
 export const StyleButtonLeft = styled(Button)(({theme}) => ({
-  position: 'flex',
-  right: '9.1%',
+  position: "sticky",
+  top: 50,
   height: '100px',
   width: '200px',
   borderRadius: '150px 150px 0 0',
   backgroundColor: 'green',
   msTransform: 'rotate(-90deg)', 
   webkitTransform: 'rotate(-90deg)', 
-  transform: 'rotate(-90deg)'
+  transform: 'rotate(-90deg) translateY(58px) translateX(-180px)',
+  
+}))
+
+export const StyleBoxMobileButton = styled(Box)(({theme}) => ({   
+  display: "none",
+  "@media (min-width: 1024px)": {
+    display: "flex"
+  },
+}))
+
+export const StyleBoxMobile = styled(Box)(({theme}) => ({   
+  display: "flex",
+  padding: '1rem 0rem 0rem 0rem',
+  "@media (min-width: 1024px)": {
+    display: "none"
+  },
 }))
 
 export const StyleTypographyLeft = styled(Typography)(({theme}) => ({   
   transform: 'rotate(90deg)'
 }))
 
-
 export const StyleButtonRight = styled(Button)(({theme}) => ({
+  position: "sticky",
+  top: 50,
+  height: '100px',
+  width: '200px',
+  borderRadius: '150px 150px 0 0',
+  backgroundColor: 'green',
+  msTransform: 'rotate(90deg)', 
+  webkitTransform: 'rotate(90deg)', 
+  transform: 'rotate(90deg) translateY(49px) translateX(180px)'
+
+}))
+
+export const StyleButtonHome = styled(Button)(({theme}) => ({
   position: 'flex',
-  left: '9.1%',
+  right: '24.3%',
+  top: '17rem',
   height: '100px',
   width: '200px',
   borderRadius: '150px 150px 0 0',
@@ -40,7 +69,8 @@ export const StyleButtonRight = styled(Button)(({theme}) => ({
 
 export const StyleTypographyRight = styled(Typography)(({theme}) => ({
   display:'grid',
- transform: 'rotate(-90deg)'
+  transform: 'rotate(-90deg)',
+  color:'white'
 }))
 
 
