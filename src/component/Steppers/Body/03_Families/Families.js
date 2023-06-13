@@ -50,7 +50,7 @@ function Families() {
             <Box>
                 {countFamilyMembersComponent.map((member, index) => (
                     <Box mb={2} key={member.internalId}>
-                        <FamiliyMemberComponent id={member.internalId} onDelete={() => handleDeleteMemberFamily(member)} />
+                        <FamiliyMemberComponent member={member} id={member.internalId} onDelete={() => handleDeleteMemberFamily(member)} />
                     </Box>
                 ))}
             </Box>
