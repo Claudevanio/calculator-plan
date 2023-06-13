@@ -269,7 +269,8 @@ function App(props) {
                         </Drawer>
                     </Box>
 
-                    <Box marginTop="8rem">
+                    <Box 
+                    marginTop={isMobile(windowSize) ? "3rem" : "8rem"}>
                         <Box>
                             <Box
                                 sx={{ background: "white" }}

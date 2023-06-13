@@ -1,6 +1,6 @@
 import { styled } from "@mui/material/styles";
 import Avatar from "@mui/material/Avatar";
-import { Badge, IconButton, ToggleButton } from "@mui/material";
+import { Badge, Grid, IconButton, ToggleButton } from "@mui/material";
 
 export const SmallAvatar = styled(Avatar)(({ theme }) => ({
   width: 22,
@@ -15,6 +15,14 @@ export const StyleIconButton = styled(IconButton)(({ theme }) => ({
     display: "none",
   },
 }));
+
+export const StyleGrid= styled(Grid)(({ theme }) => ({
+ 
+  "@media (min-width: 1024px)": {
+    width: '40rem',
+  },
+}));
+
 
 export const StyleToggleButton = styled(ToggleButton)(({ theme }) => ({
   padding: '0.2rem',
