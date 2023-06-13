@@ -2,23 +2,64 @@ import { Box, Button, Divider, Grid, Typography } from "@mui/material";
 import CheckBoxPriorites from "../../../CheckBoxPriorites/CheckBoxPrioritesComponent";
 import { useFamily } from "../../../../context/context";
 import { StyleGrid } from "../../../AvatarWithBadge/styles";
+import { useEffect, useState } from "react";
 
 function Priorities() {
   const { family, setFamily } = useFamily();
+  const [hasFalseValue, setHasFalseValue] = useState(true);
 
   const handleSelect = (prop, value) => {
     setFamily((prevFamily) => ({
       ...prevFamily,
       [prop]: value,
     }));
-
-    
   };
+
+  const checkFalseValue = (object) => {
+    debugger;
+    const hasFalseValue = Object.values(object).some(
+      (value) => value === false
+    );
+    return hasFalseValue;
+  };
+
+  const handleUnselectAll = () => {
+    const hasFalseValue = checkFalseValue(family);
+    console.log(hasFalseValue);
+    const updatedFamily = { ...family };
+
+    if (!hasFalseValue) {
+      for (const prop in updatedFamily) {
+        if (typeof updatedFamily[prop] === "boolean") {
+          updatedFamily[prop] = false;
+        }
+      }
+    }
+
+    if (hasFalseValue) {
+      for (const prop in updatedFamily) {
+        if (typeof updatedFamily[prop] === "boolean") {
+          updatedFamily[prop] = true;
+        }
+      }
+    }
+
+    setFamily(updatedFamily);
+  };
+
+  useEffect(() => {
+    const hasFalseValue = checkFalseValue(family);
+
+    setHasFalseValue(hasFalseValue);
+  }, [family]);
 
   return (
     <Box>
       <Box>
-        <Button> Unselect All</Button>
+        <Button onClick={handleUnselectAll}>
+          {" "}
+          {hasFalseValue ? "Select All" : "Unselect All"}{" "}
+        </Button>
         <Divider variant="middle" />
         <Box>
           <Grid container gap={8}>
