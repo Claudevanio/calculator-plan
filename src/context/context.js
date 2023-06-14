@@ -141,7 +141,7 @@ export function FamilyContextProvider({ children }) {
       ],
     },
   ]);
-  const [activeStep, setActiveStep] = useState(2);
+  const [activeStep, setActiveStep] = useState(12);
 
   const [idMembers, setIdMembers] = useState(1);
   const [countFamilyMembersComponent, setCountFamilyMembersComponent] =
