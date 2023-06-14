@@ -1,7 +1,7 @@
 class FamilyMember {
     constructor(id, nameMember, age) {
       this.id = id;
-      this.nameMember = "";
+      this.nameMember = nameMember;
       this.age = age;
       this.mediaBalance = [];
       this.communicatingAboutMedia = [];

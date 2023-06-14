@@ -16,10 +16,10 @@ import { DeleteButton, DeleteButtonDesktop } from "./styles";
 import FamilyMember from "../../entities/familyMember";
 import { useFamily } from "../../context/context";
 import { StyleToggleButton } from "../AvatarWithBadge/styles";
-import ClearIcon from '@mui/icons-material/Clear';
+import ClearIcon from "@mui/icons-material/Clear";
 
 function FamiliyMemberComponent({ onDelete, id }) {
-  const {setMembers, members, hasThisFamilyMember } = useFamily();
+  const { setMembers, members, hasThisFamilyMember } = useFamily();
   const [familyMember, setFamilyMember] = useState({ nameMember: "", age: "" });
 
   const getDataMembers = () => {
@@ -27,6 +27,7 @@ function FamiliyMemberComponent({ onDelete, id }) {
     if (currentMember) {
       setFamilyMember(currentMember);
     }
+    console.log(members);
   };
 
   const windowSize = useWindowSize();
@@ -34,17 +35,20 @@ function FamiliyMemberComponent({ onDelete, id }) {
   const DESKTOP_SMALL_SIZE = 1023;
   const isMobile = (windowSize) => windowSize.width <= DESKTOP_SMALL_SIZE;
 
-  const handleInputChange = (field, value) => {
+  const handleDataMemberChange = (field, value) => {
     setFamilyMember((prevMember) => ({ ...prevMember, [field]: value }));
+    console.log(familyMember)
   };
 
   const addFamilyMember = () => {
+    debugger
+    const hasId = hasThisFamilyMember(id);
+
     const newMember = new FamilyMember(
       id,
       familyMember.nameMember,
       familyMember.age
     );
-    const hasId = hasThisFamilyMember(id);
 
     if (!hasId) {
       members.push(newMember);
@@ -52,7 +56,8 @@ function FamiliyMemberComponent({ onDelete, id }) {
     }
 
     let updatedMembers = members.map((member) => {
-      if (member.id == id) {
+      debugger
+      if (member.id == id && member !== newMember) {
         return { ...member, ...newMember };
       }
       return member;
@@ -62,8 +67,6 @@ function FamiliyMemberComponent({ onDelete, id }) {
       //localStorage.setItem('familyMembers', members.toString())
     );
   };
-
- 
 
   useEffect(() => {
     addFamilyMember();
@@ -101,7 +104,7 @@ function FamiliyMemberComponent({ onDelete, id }) {
             value={familyMember.nameMember}
             onBlur={addFamilyMember}
             onChange={(e) =>
-              handleInputChange("nameMember", e.currentTarget?.value)
+              handleDataMemberChange("nameMember", e.currentTarget?.value)
             }
             label="Family Member's Name"
           />
@@ -109,17 +112,17 @@ function FamiliyMemberComponent({ onDelete, id }) {
       </Stack>
 
       {/* TODO: adicionar bot"ao para remover o componente ao clicar aqui, deve ser o iconde  removeer... */}
-      <DeleteButton aria-label="delete" onClick={onDelete} >
-          <ClearIcon color="error" fontSize="large" />
+      <DeleteButton aria-label="delete" onClick={onDelete}>
+        <ClearIcon color="error" fontSize="large" />
       </DeleteButton>
-          
+
       <Box>
         <Typography>Age</Typography>
         <ToggleButtonGroup
           sx={{ height: "3.5rem" }}
           exclusive
           value={familyMember.age}
-          onChange={(_, value) => handleInputChange("age", value)}
+          onChange={(_, value) => handleDataMemberChange("age", value)}
         >
           <StyleToggleButton value="0-24"> 0-24 months</StyleToggleButton>
           <StyleToggleButton value="2-3"> 2-3 years</StyleToggleButton>
@@ -128,7 +131,11 @@ function FamiliyMemberComponent({ onDelete, id }) {
           <StyleToggleButton value="adult"> Adult </StyleToggleButton>
         </ToggleButtonGroup>
 
-        <DeleteButtonDesktop flexDirection={isMobile(windowSize) ? "column" : "row"} aria-label="delete" onClick={onDelete} >
+        <DeleteButtonDesktop
+          flexDirection={isMobile(windowSize) ? "column" : "row"}
+          aria-label="delete"
+          onClick={onDelete}
+        >
           <CleaningServicesOutlined color="error" fontSize="large" />
         </DeleteButtonDesktop>
       </Box>

@@ -38,7 +38,7 @@ import ChoosingGoodContent from "../component/Steppers/Body/11_ChoosingGoodConte
 import UsingMediaTogether from "../component/Steppers/Body/12_UsingMediaTogether/UsingMediaTogether";
 import Review from "../component/Steppers/Body/13_Review/Review";
 import {
-    StyleBoxMobile,
+  StyleBoxMobile,
   StyleBoxMobileButton,
   StyleButtonHome,
   StyleButtonLeft,
@@ -47,24 +47,23 @@ import {
   StyleTypographyRight,
 } from "../component/AvatarWithBadge/styles";
 import Home from "../component/Steppers/Body/01_Home/Home";
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ArticleIcon from '@mui/icons-material/Article';
-import SelfImprovementIcon from '@mui/icons-material/SelfImprovement';
-import SmsIcon from '@mui/icons-material/Sms';
-import HandshakeIcon from '@mui/icons-material/Handshake';
-import PhonelinkLockIcon from '@mui/icons-material/PhonelinkLock';
-import CalendarViewDayIcon from '@mui/icons-material/CalendarViewDay';
-import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
-import MobileFriendlyIcon from '@mui/icons-material/MobileFriendly';
-import FamilyRestroomIcon from '@mui/icons-material/FamilyRestroom';
-import PrintIcon from '@mui/icons-material/Print';
-
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArticleIcon from "@mui/icons-material/Article";
+import SelfImprovementIcon from "@mui/icons-material/SelfImprovement";
+import SmsIcon from "@mui/icons-material/Sms";
+import HandshakeIcon from "@mui/icons-material/Handshake";
+import PhonelinkLockIcon from "@mui/icons-material/PhonelinkLock";
+import CalendarViewDayIcon from "@mui/icons-material/CalendarViewDay";
+import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
+import MobileFriendlyIcon from "@mui/icons-material/MobileFriendly";
+import FamilyRestroomIcon from "@mui/icons-material/FamilyRestroom";
+import PrintIcon from "@mui/icons-material/Print";
 
 function App(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { isDisableNextButton, createPDF, family, members } = useFamily();
+  const { handleNext, handleBack,  activeStep, setActiveStep } = useFamily();
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -75,7 +74,7 @@ function App(props) {
     setMobileOpen((prevState) => !prevState);
   };
 
-  const [activeStep, setActiveStep] = useState(1);
+
 
   const steps = [
     "Home",
@@ -92,30 +91,6 @@ function App(props) {
     "Using Media Together",
     "Review",
   ];
-
-  const handleNext = () => {
-    // if (activeStep === 13) {
-    //   for (let index = 0; index <= members.length; index++) {
-    //     createPDF(family, members[index]);
-    //   }
-    // }
-    if (activeStep === 11) {
-      console.log("entreiaqui");
-      console.log(members);
-      //createPDF(family, members[0]);
-    }
-    if (activeStep === 3) {
-      console.log(members);
-    }
-    
-    console.log("entreiaqui");
-    console.log(activeStep);
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
 
   const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
     [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -298,7 +273,7 @@ function App(props) {
 
   function ColorlibStepIcon(props) {
     const { active, completed, className } = props;
-   
+
     const icons = {
       1: <SettingsIcon />,
       2: <GroupAddIcon />,
@@ -329,6 +304,7 @@ function App(props) {
 
   const DESKTOP_SMALL_SIZE = 1023;
   const isMobile = (windowSize) => windowSize.width <= DESKTOP_SMALL_SIZE;
+
 
   return (
     <Box>
@@ -391,23 +367,23 @@ function App(props) {
               sx={{ display: "flex" }}
             >
               <Box>
-                <Home setActiveStep = {setActiveStep}></Home>
+                <Home setActiveStep={setActiveStep}></Home>
               </Box>
               <Box>
-              <StyleBoxMobileButton>
-                <StyleButtonHome variant="contained" onClick={handleNext}>
-                  <StyleTypographyRight sx={{color:'white'}}>
-                    <Box>
-                      <Typography>
-                        {activeStep === steps.length - 1
-                          ? "Finish"
-                          : "Continue"}
-                      </Typography>
-                      <ArrowForwardIcon ></ArrowForwardIcon>
-                    </Box>
-                  </StyleTypographyRight>
-                </StyleButtonHome>
-              </StyleBoxMobileButton>
+                <StyleBoxMobileButton>
+                  <StyleButtonHome variant="contained" onClick={handleNext}>
+                    <StyleTypographyRight sx={{ color: "white" }}>
+                      <Box>
+                        <Typography>
+                          {activeStep === steps.length - 1
+                            ? "Finish"
+                            : "Continue"}
+                        </Typography>
+                        <ArrowForwardIcon></ArrowForwardIcon>
+                      </Box>
+                    </StyleTypographyRight>
+                  </StyleButtonHome>
+                </StyleBoxMobileButton>
               </Box>
             </Box>
           ) : (
@@ -421,7 +397,7 @@ function App(props) {
                   onClick={handleBack}
                   sx={{ mr: 1 }}
                 >
-                  <StyleTypographyLeft sx={{color:'white'}}>
+                  <StyleTypographyLeft sx={{ color: "white" }}>
                     <Box>
                       <Typography>Back</Typography>
                       <Typography>
@@ -432,9 +408,7 @@ function App(props) {
                   </StyleTypographyLeft>
                 </StyleButtonLeft>
               </StyleBoxMobileButton>
-              <Box
-                sx={{ background: "white" }}
-              >
+              <Box sx={{ background: "white" }}>
                 {renderStepContentHeader(activeStep)}
                 <Box>
                   <Box sx={{ marginTop: "2rem", background: "white" }}>
@@ -452,23 +426,21 @@ function App(props) {
                       ))}
                     </Stepper>
                   </Box>
-                  <StyleBoxMobile >
-                    <Button 
-                        disabled={activeStep === 0}
-                        onClick={handleBack}>
-                        <ArrowBackIcon></ArrowBackIcon> 
-                        <Typography>
-                            Back {activeStep} of {steps.length}
-                        </Typography>
+                  <StyleBoxMobile>
+                    <Button disabled={activeStep === 0} onClick={handleBack}>
+                      <ArrowBackIcon></ArrowBackIcon>
+                      <Typography>
+                        Back {activeStep} of {steps.length}
+                      </Typography>
                     </Button>
                     <Button variant="contained" onClick={handleNext}>
-                        <Typography>
-                            {activeStep === steps.length - 1
-                            ? "Finish "
-                            : "Continue "}
-                            {activeStep + 2} of {steps.length}  
-                        </Typography>
-                        <ArrowForwardIcon></ArrowForwardIcon>
+                      <Typography>
+                        {activeStep === steps.length - 1
+                          ? "Finish "
+                          : "Continue "}
+                        {activeStep + 2} of {steps.length}
+                      </Typography>
+                      <ArrowForwardIcon></ArrowForwardIcon>
                     </Button>
                   </StyleBoxMobile>
                 </Box>
@@ -496,7 +468,7 @@ function App(props) {
                 </Box>
               </Box>
               <StyleBoxMobileButton sx={{ position: "relative" }}>
-                <StyleButtonRight variant="contained" onClick={handleNext} >
+                <StyleButtonRight variant="contained" onClick={handleNext}>
                   <StyleTypographyRight>
                     <Box>
                       <Typography>

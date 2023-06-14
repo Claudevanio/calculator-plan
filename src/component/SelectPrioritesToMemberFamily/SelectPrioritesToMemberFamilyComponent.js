@@ -17,7 +17,7 @@ function SelectPrioritesToMemberFamilyComponent({ data }) {
 
   const DESKTOP_SMALL_SIZE = 1023;
   const isMobile = (windowSize) => windowSize.width <= DESKTOP_SMALL_SIZE;
-
+  //PassarSteppers no lugar do mediaBalance na linha 31 e 32
   const { text, stepper } = data;
 
   const [selectedButtons, setSelectedButtons] = useState([]);

@@ -9,10 +9,12 @@ function Priorities() {
   const [hasFalseValue, setHasFalseValue] = useState(true);
 
   const handleSelect = (prop, value) => {
+    console.log("Dei um salve aqui")
     setFamily((prevFamily) => ({
       ...prevFamily,
       [prop]: value,
     }));
+    console.log(family)
   };
 
   const checkFalseValue = (object) => {
@@ -24,6 +26,8 @@ function Priorities() {
   };
 
   const handleUnselectAll = () => {
+    console.log("Dei um salve aqui")
+    
     const hasFalseValue = checkFalseValue(family);
     console.log(hasFalseValue);
     const updatedFamily = { ...family };
