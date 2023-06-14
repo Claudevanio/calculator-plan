@@ -18,12 +18,11 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 
 import DrawerComponent from "../component/Drawer/Drawer";
-import DrawerComponent from "../component/Drawer/Drawer";
 import SettingsIcon from "@mui/icons-material/Settings";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import VideoLabelIcon from "@mui/icons-material/VideoLabel";
 
-import { FamilyContextProvider } from "../context/context";
+import { FamilyContextProvider, useFamily } from "../context/context";
 import { useWindowSize } from "../hooks/useWindowSize";
 import { useState } from "react";
 import Tutorial from "../component/Steppers/Body/02_Tutorial/Tutorial";
