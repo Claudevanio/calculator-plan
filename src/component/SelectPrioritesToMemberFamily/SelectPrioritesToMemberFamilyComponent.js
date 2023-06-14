@@ -27,9 +27,9 @@ function SelectPrioritesToMemberFamilyComponent({ data }) {
       return prevMembers.map((member) => {
         if (member.id === memberId) {
           // Verificar se o valor já existe no array mediaBalance do membro
-          const mediaBalance = member.mediaBalance.includes(stepper)
-            ? member.mediaBalance.filter((value) => value !== stepper)
-            : [...member.mediaBalance, stepper];
+          const mediaBalance = member.mediaBalance.includes(text[0])
+            ? member.mediaBalance.filter((value) => value !== text[0])
+            : [...member.mediaBalance, text[0]];
 
           // Atualizar a propriedade mediaBalance do membro encontrado
           return {
@@ -100,7 +100,7 @@ function SelectPrioritesToMemberFamilyComponent({ data }) {
 
                   <Stack>
                     <Typography variant="h6">
-                      {member ? member.nameMember : ""}
+                      {member.nameMember ? member.nameMember : ""}
                     </Typography>
                     <Typography
                       variant="h9"
