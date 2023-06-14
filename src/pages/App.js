@@ -14,10 +14,10 @@ import {
   styled,
   StepConnector,
   stepConnectorClasses,
-  Grid,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
+import DrawerComponent from "../component/Drawer/Drawer";
 import DrawerComponent from "../component/Drawer/Drawer";
 import SettingsIcon from "@mui/icons-material/Settings";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
@@ -65,6 +65,7 @@ import PrintIcon from '@mui/icons-material/Print';
 function App(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { isDisableNextButton, createPDF, family, members } = useFamily();
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -94,6 +95,22 @@ function App(props) {
   ];
 
   const handleNext = () => {
+    // if (activeStep === 13) {
+    //   for (let index = 0; index <= members.length; index++) {
+    //     createPDF(family, members[index]);
+    //   }
+    // }
+    if (activeStep === 11) {
+      console.log("entreiaqui");
+      console.log(members);
+      //createPDF(family, members[0]);
+    }
+    if (activeStep === 3) {
+      console.log(members);
+    }
+    
+    console.log("entreiaqui");
+    console.log(activeStep);
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 

@@ -1,25 +1,55 @@
-import * as React from "react";
 import SelfImprovementIcon from "@mui/icons-material/SelfImprovement";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import {
   Box,
   Button,
-  Container,
-  Divider,
   Grid,
   Stack,
-  TextField,
   ToggleButton,
-  ToggleButtonGroup,
   Typography,
 } from "@mui/material";
 import { useFamily } from "../../context/context";
+import { useState } from "react";
 
-function SelectPrioritesToMemberFamilyComponent({ text, member }) {
-  const { members } = useFamily();
+function SelectPrioritesToMemberFamilyComponent({ data }) {
+  const { members, setMembers } = useFamily();
+  const windowSize = useWindowSize();
+
   const DESKTOP_SMALL_SIZE = 1023;
   const isMobile = (windowSize) => windowSize.width <= DESKTOP_SMALL_SIZE;
-  const windowSize = useWindowSize();
+
+  const { text, stepper } = data;
+
+  const [selectedButtons, setSelectedButtons] = useState([]);
+
+  const handleToggle = (memberId) => {
+    setMembers((prevMembers) => {
+      return prevMembers.map((member) => {
+        if (member.id === memberId) {
+          // Verificar se o valor já existe no array mediaBalance do membro
+          const mediaBalance = member.mediaBalance.includes(stepper)
+            ? member.mediaBalance.filter((value) => value !== stepper)
+            : [...member.mediaBalance, stepper];
+
+          // Atualizar a propriedade mediaBalance do membro encontrado
+          return {
+            ...member,
+            mediaBalance: mediaBalance,
+          };
+        }
+        return member;
+      });
+    });
+
+    console.log(members);
+
+    if (!selectedButtons.includes(memberId)) {
+    }
+    setSelectedButtons([...selectedButtons, memberId]);
+
+    if (selectedButtons.includes(memberId))
+      setSelectedButtons(selectedButtons.filter((id) => id !== memberId));
+  };
 
   return (
     <Box
@@ -30,11 +60,11 @@ function SelectPrioritesToMemberFamilyComponent({ text, member }) {
       borderRadius={1}
       padding={2}
     >
-      <Box>
-        <Stack direction="row" gap>
+      <Box sx={{ maxWidth: "55%" }}>
+        <Stack direction="row">
           <SelfImprovementIcon fontSize="large" color="success" />
           <Stack>
-            <Typography variant="h6"> {text} </Typography>
+            <Typography variant="h6"> {text[0]} </Typography>
             <Box>
               <Button variant="outlined"> Reason / Tips</Button>
               <Button variant="outlined"> UnselectAll </Button>
@@ -46,10 +76,14 @@ function SelectPrioritesToMemberFamilyComponent({ text, member }) {
       <Box sx={{ maxHeight: "45%" }}>
         <Grid container gap={2}>
           {members.map((member, index) => (
-            <Grid item xl={6} key={index}>
-              <ToggleButton sx={{ textTransform: "none", minWidth: "10rem" }}>
+            <Grid item key={index}>
+              <ToggleButton
+                selected={selectedButtons.includes(member.id)}
+                onChange={() => handleToggle(member.id)}
+                sx={{ textTransform: "none", minWidth: "10rem" }}
+              >
                 <Stack gap={1} direction="row" height={42}>
-                  <Stack alignItems="center">
+                  <Stack>
                     <Box
                       borderRadius={"16rem"}
                       border={1}
