@@ -8,7 +8,7 @@ import {
   ToggleButtonGroup,
   Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { AvatarWithBadge } from "../AvatarWithBadge";
 import { CleaningServicesOutlined } from "@mui/icons-material";
@@ -17,11 +17,13 @@ import FamilyMember from "../../entities/familyMember";
 import { useFamily } from "../../context/context";
 import { StyleToggleButton } from "../AvatarWithBadge/styles";
 import ClearIcon from "@mui/icons-material/Clear";
-import Demo from "./AvatarFamilie";
+import SimpleDialog from "./ModalAvatarFamile";
+import PropTypes from 'prop-types';
 
-function FamiliyMemberComponent({ onDelete, id }) {
+function FamiliyMemberComponent({ onDelete, id, props }) {
   const { setMembers, members, hasThisFamilyMember } = useFamily();
   const [familyMember, setFamilyMember] = useState({ nameMember: "", age: "" });
+  
 
   const getDataMembers = () => {
     const currentMember = members.find((member) => member.id === id);
@@ -74,7 +76,25 @@ function FamiliyMemberComponent({ onDelete, id }) {
   useEffect(() => {
     getDataMembers();
   }, []);
+  
+  const avatar = [];
+  const [open, setOpen] = React.useState(false);
+  const [selectedValue, setSelectedValue] = React.useState(avatar[1]);
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (value) => {
+    setOpen(false);
+    setSelectedValue(value);
+  };
+
+  SimpleDialog.propTypes = {
+    onClose: PropTypes.func.isRequired,
+    open: PropTypes.bool.isRequired,
+    selectedValue: PropTypes.string.isRequired,
+  };
   return (
     <Box
       display="flex"
@@ -89,15 +109,10 @@ function FamiliyMemberComponent({ onDelete, id }) {
       <Stack 
       width={isMobile(windowSize) ? "100%" : "49%"}
       sx={{marginTop: '12px'}} direction="row" alignItems="center" gap={4}>
-        <AvatarWithBadge
-          url={"https://www.pngmart.com/files/5/Poro-PNG-Image.png"}
-          onSmallBadgeClick={() => {
-            console.log(
-              "Implementar logica para abrir a midal para editar o avatar."
-            );
-          }}
-        />
-      
+   
+      <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} />
+   
+
         <Box sx={{marginTop: '12px'}}>
           <TextField
             id="name-member-input"
@@ -110,8 +125,7 @@ function FamiliyMemberComponent({ onDelete, id }) {
           />
         </Box>
       </Stack>
-
-      {/* TODO: adicionar bot"ao para remover o componente ao clicar aqui, deve ser o iconde  removeer... */}
+      
       <DeleteButton aria-label="delete" onClick={onDelete}>
         <ClearIcon color="error" fontSize="large" />
       </DeleteButton>

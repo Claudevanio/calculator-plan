@@ -74,8 +74,6 @@ function App(props) {
     setMobileOpen((prevState) => !prevState);
   };
 
-
-
   const steps = [
     "Home",
     "Tutorial",

@@ -8,13 +8,11 @@ import {
 } from "@mui/material";
 import FamiliyMemberComponent from "../../../FamileMember/FamileMemberComponent";
 import { useFamily } from "../../../../context/context";
-
+import Modal from 'react-modal';
 
 
 function Families() {
     const { family, createFamily, setMembers, countFamilyMembersComponent, setCountFamilyMembersComponent, generateId } = useFamily();
-
-
 
     const handleCreateFamily = (event) => {
         event.preventDefault();
