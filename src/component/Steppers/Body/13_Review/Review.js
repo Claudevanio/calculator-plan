@@ -1,7 +1,138 @@
-import { Box, Button, Stack } from "@mui/material";
-import MyPDFViewer from "../../../pdf/pdfView";
+// import { Box, Button, Stack } from "@mui/material";
+// import MyPDFViewer from "../../../pdf/pdfView";
 
-function Review() {
+// function Review() {
+//   const data = {
+//     familyName: "Undefined",
+//     hasMediaBalance: true,
+//     hasCommunicatingAboutMedia: true,
+//     familyMembers: [
+//       {
+//         id: 1,
+//         nameMember: "Diego",
+//         age: "Adult",
+//         mediaBalance: {
+//           titleSection:
+//             "We will help balance tech with online and offline activities by:",
+//           topicos: [
+//             "DiegoContente",
+//             "DiegoContente",
+//             "DiegoContente",
+//             "DiegoContente",
+//             "DiegoContente",
+//             "DiegoContente",
+//             "DiegoContente",
+//           ],
+//         },
+//         communicatingAboutMedia: {
+//           titleSection: "We will communicate about media by:",
+//           topicos: [
+//             "DiegoContente",
+//             "DiegoContente",
+//             "DiegoContente",
+//             "DiegoContente",
+//             "DiegoContente",
+//             "DiegoContente",
+//             "DiegoContente",
+//           ],
+//         },
+//       },
+//       {
+//         id: 2,
+//         nameMember: "Van",
+//         age: "Jovem",
+//         mediaBalance: {
+//           titleSection:
+//             "We will help balance tech with online and offline activities by:",
+//           topicos: [
+//             "VanContente",
+//             "VanContente",
+//             "VanContente",
+//             "VanContente",
+//             "VanContente",
+//             "VanContente",
+//             "VanContente",
+//           ],
+//         },
+//         communicatingAboutMedia: {
+//           titleSection: "We will communicate about media by:",
+//           topicos: [
+//             "VanContente",
+//             "VanContente",
+//             "VanContente",
+//             "VanContente",
+//             "VanContente",
+//             "VanContente",
+//             "VanContente",
+//           ],
+//         },
+//       },
+//     ],
+//   };
+
+//   return (
+//     <Box sx={{ width: "100%", height: "100%"}}>
+//       {data.familyMembers.map((member, index) => (
+//         <MyPDFViewer key={index} family={data} member={member} />
+//       ))}
+//     </Box>
+//   );
+// }
+
+// export default Review;
+
+
+import * as React from 'react';
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import MyPDFViewer from "../../../pdf/pdfView";
+import MyPDFReviewComponent from '../../../pdf/pdfReviewComponente';
+import { Button } from '@mui/material';
+
+function Review(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+Review.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
+
+export default function BasicTabs() {
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+
   const data = {
     familyName: "Undefined",
     hasMediaBalance: true,
@@ -71,12 +202,44 @@ function Review() {
   };
 
   return (
-    <Box sx={{ width: "100%", height: "100%"}}>
+    <Box >
+      <Box sx={{display:'flex', justifyContent:'space-around', padding: '3rem 2rem 4rem 2rem'}}>
+        <Box>
+          <Button sx={{background:'orange', width:'35rem', color:'white'}}>
+            Imprimir el resumo del plan familiar de uso de pantalhas de los {data.familyName}
+          </Button>
+        </Box>
+        <Box>
+          <Typography sx={{ width:'35rem', textAlign: 'center'}}>
+            Ingrese o regístrese para enviar su plan de uso de pantallas por correo electrónico o mensaje de texto
+          </Typography>
+        </Box>
+      </Box>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+        {data.familyMembers.map((member, index) => (
+        <Tab key={index} label={member.nameMember}  family={data} member={member} {...a11yProps(index)} />
+        ))}        
+        </Tabs>
+      </Box>
       {data.familyMembers.map((member, index) => (
-        <MyPDFViewer key={index} family={data} member={member} />
-      ))}
+      <Review value={value} index={index}>
+        <MyPDFReviewComponent key={index} family={data} member={member} />
+      </Review>
+      ))}      
+
+      {/* <Review value={value} index={0}>
+      {data.familyMembers.map((member, index) => (
+        <MyPDFViewer key={index} family={data} member={member}/>
+        ))} 
+      </Review>
+      <Review value={value} index={1}>
+        Item Two
+      </Review>
+      <Review value={value} index={2}>
+        Item Three
+      </Review> */}
     </Box>
   );
 }
 
-export default Review;

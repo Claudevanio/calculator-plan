@@ -17,7 +17,7 @@ function CommunicatingAboutMedia() {
 
       <Box>
         <Grid container gap={4}>
-          <Grid item>
+          <Grid item xs={12}> 
             {" "}
             <SelectPrioritesToMemberFamilyComponent data={datas[1]} />{" "}
           </Grid>

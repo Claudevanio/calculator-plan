@@ -258,6 +258,8 @@ function App(props) {
         return <Step10ComponentHeader />;
       case 11:
         return <Step11ComponentHeader />;
+      case 12:
+          return <Step12ComponentHeader />;  
       default:
         return null;
     }
@@ -467,8 +469,9 @@ function App(props) {
                   </Box>
                 </Box>
               </Box>
-              <StyleBoxMobileButton sx={{ position: "relative" }}>
-                <StyleButtonRight variant="contained" onClick={handleNext}>
+              <StyleBoxMobileButton 
+              sx={{ position: "relative" }}>
+                <StyleButtonRight variant="contained"  disabled={activeStep === 12} onClick={handleNext}>
                   <StyleTypographyRight>
                     <Box>
                       <Typography>
@@ -644,6 +647,38 @@ const Step11ComponentHeader = () => {
         build bonds, promote learning and show your child that you care about
         what matters to them.
       </Typography>
+    </Box>
+  );
+};
+
+
+const Step12ComponentHeader = () => {
+  return (
+    <Box sx={{ padding: "2rem", background: "#D5D3C1" }}>
+      <Typography variant="h4">Plan familiar de uso de pantallas de</Typography>
+      <Box sx={{ marginTop: "2rem", marginBottom: "2rem" }}>
+        <Typography>
+            Felicitaciones en la creación de su plan familiar de uso de pantallas! 
+            No olvide desplazarse hasta la parte superior de la página para imprimirlo y 
+            colocarlo en un lugar donde todos en la familia puedan verlo. También puede 
+            enviarlo por correo electrónico o compartir su plan. Vuelva a revisar su plan 
+            familiar con la frecuencia que necesite, como al comienzo​ de cada año escolar
+            o durante las vacaciones de verano y feriados.
+          ​</Typography>
+          <Typography>
+            Fuente: American Academy of Pediatrics (Copyright © 2022) - Consejo de Comunicaciones y Medios​
+          </Typography>
+          <Typography>
+            Autores principales: Jenny Radesky, MD, FAAP; Megan A. Moreno, MD, MSEd, MPH, FAAP; Suzy Tomopoulos MD, FAAP. 
+          </Typography>
+          <Typography>
+            Colaboradores: Corinn Cross, MD, FAAP; Yolanda (Linda) Reid Chassiakos, MD, FAAP; Dimitri Christakis, MD, MPH, FAAP. 
+          </Typography>
+          <Typography>
+           ​​​La información contenida en este sitio web no debe utilizarse como sustituto de la atención médica y el consejo de su pediatra.
+           Puede haber variaciones en el tratamiento que su pediatra puede recomendar en función de los hechos y circunstancias individuales​. 
+          </Typography>
+      </Box>
     </Box>
   );
 };

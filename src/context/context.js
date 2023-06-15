@@ -148,8 +148,7 @@ export function FamilyContextProvider({ children }) {
     useState([{ internalId: generateId() }, { internalId: generateId() }]);
   const [isDisableNextButton, setIsDisableNextButton] = useState(false);
 
-  const createFamily = (nameFamily) => {
-    debugger;
+  const createFamily = (nameFamily) => {   
     const familyModel = new Family(nameFamily);
     setFamily(familyModel);
     console.log(family);
@@ -159,8 +158,7 @@ export function FamilyContextProvider({ children }) {
     return members.some((member) => member.id === id);
   };
 
-  const handleNext = () => {
-    debugger;
+  const handleNext = () => {    
     // if (activeStep === 13) {
     //   for (let index = 0; index <= members.length; index++) {
     //     createPDF(family, members[index]);
