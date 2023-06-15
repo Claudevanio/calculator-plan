@@ -410,10 +410,10 @@ function App(props) {
                   </StyleTypographyLeft>
                 </StyleButtonLeft>
               </StyleBoxMobileButton>
-              <Box sx={{ background: "white" }}>
+              <Box sx={{ background: "#FAFAEF" }}>
                 {renderStepContentHeader(activeStep)}
                 <Box>
-                  <Box sx={{ marginTop: "2rem", background: "white" }}>
+                  <Box sx={{ marginTop: "2rem", background: "#FAFAEF" }}>
                     <Stepper
                       alternativeLabel
                       activeStep={activeStep}

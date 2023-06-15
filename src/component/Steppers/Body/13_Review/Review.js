@@ -91,6 +91,7 @@ import Box from '@mui/material/Box';
 import MyPDFViewer from "../../../pdf/pdfView";
 import MyPDFReviewComponent from '../../../pdf/pdfReviewComponente';
 import { Button } from '@mui/material';
+import ReactToPrint, { useReactToPrint } from 'react-to-print';
 
 function Review(props) {
   const { children, value, index, ...other } = props;
@@ -201,16 +202,24 @@ export default function BasicTabs() {
     ],
   };
 
+  
+    const componentRef = React.useRef();
+    const handlePrint = useReactToPrint({
+      content: () => componentRef.current,
+      documentTitle: 'emp-data'
+    });
+
+
   return (
     <Box >
       <Box sx={{display:'flex', justifyContent:'space-around', padding: '3rem 2rem 4rem 2rem'}}>
         <Box>
-          <Button sx={{background:'orange', width:'35rem', color:'white'}}>
+          <Button sx={{background:'orange', color:'white'}} onClick={handlePrint}>
             Imprimir el resumo del plan familiar de uso de pantalhas de los {data.familyName}
           </Button>
         </Box>
         <Box>
-          <Typography sx={{ width:'35rem', textAlign: 'center'}}>
+          <Typography sx={{  textAlign: 'center'}}>
             Ingrese o regístrese para enviar su plan de uso de pantallas por correo electrónico o mensaje de texto
           </Typography>
         </Box>
@@ -222,23 +231,15 @@ export default function BasicTabs() {
         ))}        
         </Tabs>
       </Box>
+      <Box ref={componentRef}>
       {data.familyMembers.map((member, index) => (
       <Review value={value} index={index}>
         <MyPDFReviewComponent key={index} family={data} member={member} />
       </Review>
-      ))}      
-
-      {/* <Review value={value} index={0}>
-      {data.familyMembers.map((member, index) => (
-        <MyPDFViewer key={index} family={data} member={member}/>
-        ))} 
-      </Review>
-      <Review value={value} index={1}>
-        Item Two
-      </Review>
-      <Review value={value} index={2}>
-        Item Three
-      </Review> */}
+      ))}  
+      </Box>
+    
+     
     </Box>
   );
 }

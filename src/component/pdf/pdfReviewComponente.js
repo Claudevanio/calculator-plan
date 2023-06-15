@@ -7,7 +7,7 @@ import { BoxStyle, ReviewBoxStyle, ReviewTypographyStyle, UlStyle } from "./pdfR
 
 
 const MyPDFReviewComponent = ({ family, member }) => (
-    <Box sx={{border: '1px solid', padding: '1.5rem'}}>
+    <Box sx={{border: '1px solid', padding: '1.5rem', background: 'white'}}>
         <BoxStyle sx={{display:'flex'}}>
             <Box sx={{paddingRight: '1rem'}}>
                 <AvatarWithBadge

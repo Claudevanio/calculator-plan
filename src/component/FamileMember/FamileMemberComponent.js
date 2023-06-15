@@ -17,6 +17,7 @@ import FamilyMember from "../../entities/familyMember";
 import { useFamily } from "../../context/context";
 import { StyleToggleButton } from "../AvatarWithBadge/styles";
 import ClearIcon from "@mui/icons-material/Clear";
+import Demo from "./AvatarFamilie";
 
 function FamiliyMemberComponent({ onDelete, id }) {
   const { setMembers, members, hasThisFamilyMember } = useFamily();
@@ -96,7 +97,7 @@ function FamiliyMemberComponent({ onDelete, id }) {
             );
           }}
         />
-
+      
         <Box sx={{marginTop: '12px'}}>
           <TextField
             id="name-member-input"
