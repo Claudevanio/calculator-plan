@@ -98,7 +98,7 @@ function SimpleDialog(props) {
       padding={isMobile(windowSize) ? "2rem 0rem 2rem 1rem" : "2rem 1rem 3rem 2rem"}
       >
         <Typography sx={{fontSize:'35px'}}>Seleccione su avatar</Typography>
-        <Typography width={isMobile(windowSize) ? "80%" : ""}>
+        <Typography width={isMobile(windowSize) ? "80%" : "100%"}>
           Personalice su personaje para hacer un plan que se adapte a sus
           necesidades
         </Typography>
