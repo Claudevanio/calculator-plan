@@ -24,7 +24,7 @@ import VideoLabelIcon from "@mui/icons-material/VideoLabel";
 
 import { FamilyContextProvider, useFamily } from "../context/context";
 import { useWindowSize } from "../hooks/useWindowSize";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Tutorial from "../component/Steppers/Body/02_Tutorial/Tutorial";
 import Families from "../component/Steppers/Body/03_Families/Families";
 import Priorities from "../component/Steppers/Body/04_Priorites/Priorites";
@@ -60,18 +60,40 @@ import MobileFriendlyIcon from "@mui/icons-material/MobileFriendly";
 import FamilyRestroomIcon from "@mui/icons-material/FamilyRestroom";
 import PrintIcon from "@mui/icons-material/Print";
 
-
 function App(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { handleNext, handleBack,  activeStep, setActiveStep, validation, family, member ,stepFamilyValid,} = useFamily(); 
+  const { handleNext, handleBack, activeStep, setActiveStep } =
+    useFamily();
+    const [validation, setValidation] = useState(true);
 
-
-  console.log(validation)
   const container =
     window !== undefined ? () => window().document.body : undefined;
   const drawerWidth = 240;
   const navItems = ["Log in", "Register"];
+
+  // const handleDisableNextButton = (family, members) => {
+  //   debugger;
+  //   let isButtonDisabled = false;
+  //   const hasEmptyNameMember = members.some((member) => !member.nameMember);
+
+  //   if (!family.familyName) {
+  //     isButtonDisabled = true;
+  //   }
+
+  //   if (hasEmptyNameMember) {
+  //     isButtonDisabled = true;
+  //   }
+  //   console.log(isButtonDisabled);
+  //   setValidation(isButtonDisabled);
+  // };
+
+
+
+  useEffect(() => {
+    debugger
+    console.log('estive aqui')
+  }, [validation]);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -155,7 +177,7 @@ function App(props) {
         return (
           <FamilyContextProvider>
             {" "}
-            <Families />{" "}
+            <Families setValidation={setValidation} />{" "}
           </FamilyContextProvider>
         );
       case 3:
@@ -260,7 +282,7 @@ function App(props) {
       case 11:
         return <Step11ComponentHeader />;
       case 12:
-          return <Step12ComponentHeader />;  
+        return <Step12ComponentHeader />;
       default:
         return null;
     }
@@ -307,7 +329,6 @@ function App(props) {
 
   const DESKTOP_SMALL_SIZE = 1023;
   const isMobile = (windowSize) => windowSize.width <= DESKTOP_SMALL_SIZE;
-
 
   return (
     <Box>
@@ -418,7 +439,7 @@ function App(props) {
                     <Stepper
                       alternativeLabel
                       activeStep={activeStep}
-                      connector={<ColorlibConnector/>}
+                      connector={<ColorlibConnector />}
                     >
                       {getVisibleSteps().map((label) => (
                         <Step key={label}>
@@ -470,9 +491,12 @@ function App(props) {
                   </Box>
                 </Box>
               </Box>
-              <StyleBoxMobileButton 
-              sx={{ position: "relative" }}>
-                <StyleButtonRight variant="contained"  disabled={stepFamilyValid} onClick={handleNext}>
+              <StyleBoxMobileButton sx={{ position: "relative" }}>
+                <StyleButtonRight
+                  variant="contained"
+                  disabled={validation}
+                  onClick={handleNext}
+                >
                   <StyleTypographyRight>
                     <Box>
                       <Typography>
@@ -495,7 +519,6 @@ function App(props) {
     </Box>
   );
 }
-
 
 const Step1Component = () => {
   return <Home></Home>;
@@ -653,33 +676,38 @@ const Step11ComponentHeader = () => {
   );
 };
 
-
 const Step12ComponentHeader = () => {
   return (
     <Box sx={{ padding: "2rem", background: "#D5D3C1" }}>
       <Typography variant="h4">Plan familiar de uso de pantallas de</Typography>
       <Box sx={{ marginTop: "2rem", marginBottom: "2rem" }}>
         <Typography>
-            Felicitaciones en la creación de su plan familiar de uso de pantallas! 
-            No olvide desplazarse hasta la parte superior de la página para imprimirlo y 
-            colocarlo en un lugar donde todos en la familia puedan verlo. También puede 
-            enviarlo por correo electrónico o compartir su plan. Vuelva a revisar su plan 
-            familiar con la frecuencia que necesite, como al comienzo​ de cada año escolar
-            o durante las vacaciones de verano y feriados.
-          ​</Typography>
-          <Typography>
-            Fuente: American Academy of Pediatrics (Copyright © 2022) - Consejo de Comunicaciones y Medios​
-          </Typography>
-          <Typography>
-            Autores principales: Jenny Radesky, MD, FAAP; Megan A. Moreno, MD, MSEd, MPH, FAAP; Suzy Tomopoulos MD, FAAP. 
-          </Typography>
-          <Typography>
-            Colaboradores: Corinn Cross, MD, FAAP; Yolanda (Linda) Reid Chassiakos, MD, FAAP; Dimitri Christakis, MD, MPH, FAAP. 
-          </Typography>
-          <Typography>
-           ​​​La información contenida en este sitio web no debe utilizarse como sustituto de la atención médica y el consejo de su pediatra.
-           Puede haber variaciones en el tratamiento que su pediatra puede recomendar en función de los hechos y circunstancias individuales​. 
-          </Typography>
+          Felicitaciones en la creación de su plan familiar de uso de pantallas!
+          No olvide desplazarse hasta la parte superior de la página para
+          imprimirlo y colocarlo en un lugar donde todos en la familia puedan
+          verlo. También puede enviarlo por correo electrónico o compartir su
+          plan. Vuelva a revisar su plan familiar con la frecuencia que
+          necesite, como al comienzo​ de cada año escolar o durante las
+          vacaciones de verano y feriados. ​
+        </Typography>
+        <Typography>
+          Fuente: American Academy of Pediatrics (Copyright © 2022) - Consejo de
+          Comunicaciones y Medios​
+        </Typography>
+        <Typography>
+          Autores principales: Jenny Radesky, MD, FAAP; Megan A. Moreno, MD,
+          MSEd, MPH, FAAP; Suzy Tomopoulos MD, FAAP.
+        </Typography>
+        <Typography>
+          Colaboradores: Corinn Cross, MD, FAAP; Yolanda (Linda) Reid
+          Chassiakos, MD, FAAP; Dimitri Christakis, MD, MPH, FAAP.
+        </Typography>
+        <Typography>
+          ​​​La información contenida en este sitio web no debe utilizarse como
+          sustituto de la atención médica y el consejo de su pediatra. Puede
+          haber variaciones en el tratamiento que su pediatra puede recomendar
+          en función de los hechos y circunstancias individuales​.
+        </Typography>
       </Box>
     </Box>
   );
