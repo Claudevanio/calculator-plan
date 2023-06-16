@@ -64,16 +64,10 @@ import PrintIcon from "@mui/icons-material/Print";
 function App(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { handleNext, handleBack,  activeStep, setActiveStep, family, member } = useFamily(); 
+  const { handleNext, handleBack,  activeStep, setActiveStep, validation, family, member ,stepFamilyValid,} = useFamily(); 
 
 
-  const stepFamilyValid = () => {
-    if(activeStep === 12){
-      return true
-    }
-    return false
-
-  }
+  console.log(validation)
   const container =
     window !== undefined ? () => window().document.body : undefined;
   const drawerWidth = 240;
@@ -478,7 +472,7 @@ function App(props) {
               </Box>
               <StyleBoxMobileButton 
               sx={{ position: "relative" }}>
-                <StyleButtonRight variant="contained"  disabled={stepFamilyValid()} onClick={handleNext}>
+                <StyleButtonRight variant="contained"  disabled={stepFamilyValid} onClick={handleNext}>
                   <StyleTypographyRight>
                     <Box>
                       <Typography>

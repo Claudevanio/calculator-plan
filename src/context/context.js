@@ -142,6 +142,7 @@ export function FamilyContextProvider({ children }) {
     },
   ]);
   const [activeStep, setActiveStep] = useState(2);
+  const [validation, setValidation] = useState(false)
 
   const [idMembers, setIdMembers] = useState(1);
   const [countFamilyMembersComponent, setCountFamilyMembersComponent] =
@@ -180,6 +181,23 @@ export function FamilyContextProvider({ children }) {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
+
+
+  const stepFamilyValid = () => {
+    debugger
+    let hasEmptyNameMember;
+   
+    hasEmptyNameMember = members.some((member) => member.nameMember === "");
+    if(activeStep === 12){     
+      
+      return  setValidation(true)
+    }
+    if(activeStep === 2 && !family.nameFamily && hasEmptyNameMember){
+      
+      return  setValidation(true)
+    }
+    return validation
+  }
 
   const disableNextButton = () => {
     let hasEmptyNameMember;
@@ -263,8 +281,10 @@ export function FamilyContextProvider({ children }) {
   }, [activeStep]);
 
   useEffect(() => {
-    disableNextButton();
-  }, []);
+    stepFamilyValid()
+  }, [family, members]);
+
+
 
   return (
     <FamilyContext.Provider
@@ -276,6 +296,7 @@ export function FamilyContextProvider({ children }) {
         isDisableNextButton,
         datas,
         activeStep,
+        validation,
         setIsDisableNextButton,
         setMembers,
         createFamily,
@@ -287,6 +308,7 @@ export function FamilyContextProvider({ children }) {
         handleNext,
         handleBack,
         setActiveStep,
+        stepFamilyValid
       }}
     >
       {children}
