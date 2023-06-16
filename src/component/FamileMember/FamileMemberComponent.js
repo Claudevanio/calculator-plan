@@ -44,6 +44,8 @@ function FamiliyMemberComponent({ onDelete, currentMember, id, props }) {
     debugger;
     const hasId = hasThisFamilyMember(id);
 
+    let newMember;
+
     if (members.length > 0) {
       newMember = new FamilyMember(
         currentMember.id,
@@ -141,10 +143,8 @@ function FamiliyMemberComponent({ onDelete, currentMember, id, props }) {
           <ToggleButtonGroup
             sx={{ height: "3.5rem" }}
             exclusive
-            value={currentMember ? currentMember.age : familyMember.age}
-            onChange={(_, value) => {
-              handleDataMemberChange("age", value);
-            }}
+            value={familyMember.age}
+            onChange={(_, value) => handleDataMemberChange("age", value)}
           >
             <StyleToggleButton value="0-24"> 0-24 months</StyleToggleButton>
             <StyleToggleButton value="2-3"> 2-3 years</StyleToggleButton>
@@ -152,13 +152,14 @@ function FamiliyMemberComponent({ onDelete, currentMember, id, props }) {
             <StyleToggleButton value="13-18"> 13-18 years</StyleToggleButton>
             <StyleToggleButton value="adult"> Adult </StyleToggleButton>
           </ToggleButtonGroup>
-
+        </Box>
+        <Box sx={{ marginTop: "2rem" }}>
           <DeleteButtonDesktop
             flexDirection={isMobile(windowSize) ? "column" : "row"}
             aria-label="delete"
             onClick={onDelete}
           >
-            <CleaningServicesOutlined color="error" fontSize="large" />
+            <ClearIcon color="error" fontSize="large" />
           </DeleteButtonDesktop>
         </Box>
       </Box>
