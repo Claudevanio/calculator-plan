@@ -43,7 +43,6 @@ function FamiliyMemberComponent({ onDelete, currentMember, id, props }) {
   };
 
   const addFamilyMember = () => {
-    debugger;
     const hasId = hasThisFamilyMember(id);
 
     let newMember;
@@ -62,8 +61,7 @@ function FamiliyMemberComponent({ onDelete, currentMember, id, props }) {
       return;
     }
 
-    let updatedMembers = members.map((member) => {
-      debugger;
+    let updatedMembers = members.map((member) => {      
       if (member.id == id && member !== newMember) {
         return { ...member, ...newMember };
       }
@@ -103,6 +101,7 @@ function FamiliyMemberComponent({ onDelete, currentMember, id, props }) {
   return (
     <Box
       display="flex"
+      justifyContent = 'space-between'
       flexDirection={isMobile(windowSize) ? "column" : "row"}
       alignItems={isMobile(windowSize) ? "flex-start" : "center"}
       sx={{ backgroundColor: "#ffffff", position: "relative" }}

@@ -395,9 +395,9 @@ function App(props) {
               </Box>
               <Box>
                 <StyleBoxMobileButton>
-                  <StyleButtonHome variant="contained" onClick={handleNext}>
+                  <StyleButtonHome color="tertiary" variant="filledTonal" onClick={handleNext}>
                     <StyleTypographyRight sx={{ color: "white" }}>
-                      <Box>
+                      <Box sx={{marginTop: '24px', paddingRight: '8px'}}>
                         <Typography>
                           {activeStep === steps.length - 1
                             ? "Finish"
@@ -420,9 +420,10 @@ function App(props) {
                   disabled={activeStep === 0}
                   onClick={handleBack}
                   sx={{ mr: 1 }}
+                  color="primary" variant="filled"
                 >
                   <StyleTypographyLeft sx={{ color: "white" }}>
-                    <Box>
+                    <Box sx={{marginTop: '24px', paddingLeft:'13px'}}>
                       <Typography>Back</Typography>
                       <Typography>
                         {activeStep} of {steps.length}
@@ -491,14 +492,11 @@ function App(props) {
                   </Box>
                 </Box>
               </Box>
-              <StyleBoxMobileButton sx={{ position: "relative" }}>
-                <StyleButtonRight
-                  variant="contained"
-                  disabled={validation}
-                  onClick={handleNext}
-                >
+              <StyleBoxMobileButton 
+              sx={{ position: "relative" }}>
+                <StyleButtonRight color="primary" variant="filledTonal"  disabled={false} onClick={handleNext}>
                   <StyleTypographyRight>
-                    <Box>
+                    <Box sx={{marginTop: '24px', paddingRight: '8px'}}> 
                       <Typography>
                         {activeStep === steps.length - 1
                           ? "Finish"

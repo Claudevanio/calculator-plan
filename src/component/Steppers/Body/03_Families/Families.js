@@ -21,15 +21,13 @@ function Families({setValidation}) {
     generateId,
   } = useFamily();
 
-  const handleCreateFamily = (event) => {
-    debugger;
+  const handleCreateFamily = (event) => {    
     event.preventDefault();
     const familyName = event.target.value;
     createFamily(familyName);
   };
 
-  const handleCreateMemberFamilyComponent = () => {
-    debugger;
+  const handleCreateMemberFamilyComponent = () => {    
     setMembers((prevMembers) => [
       ...prevMembers,
       {

@@ -7,8 +7,7 @@ import { useEffect } from "react";
 function MediaBalance() {
   const { datas, members, family, setLocalStorage } = useFamily();
 
-  const setDataLocalStorage = (data) => {
-    debugger;
+  const setDataLocalStorage = (data) => {    
     let familyData = {};
     if (data) {
       familyData = { ...family, familyMembers: [...members] };

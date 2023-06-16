@@ -170,15 +170,13 @@ export function FamilyContextProvider({ children }) {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const setLocalStorage = (data) => {
-    debugger;
+  const setLocalStorage = (data) => {    
     if (data) {
       Storage.set("family", data);
     }
   };
 
-  const getLocalStorage = () => {
-    debugger;
+  const getLocalStorage = () => {    
     const family = Storage.get("family");
     if (family) {
       setFamily(family);
