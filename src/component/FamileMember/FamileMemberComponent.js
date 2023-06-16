@@ -21,8 +21,10 @@ import SimpleDialog from "./ModalAvatarFamile";
 import PropTypes from "prop-types";
 
 function FamiliyMemberComponent({ onDelete, currentMember, id, props }) {
-  const { setMembers, members, hasThisFamilyMember, family } = useFamily();
+  const { setMembers, members, hasThisFamilyMember, family, setValidation } =
+    useFamily();
   const [familyMember, setFamilyMember] = useState({ nameMember: "", age: "" });
+ 
 
   const getDataMembers = () => {
     const currentMember = members.find((member) => member.id === id);
@@ -68,14 +70,6 @@ function FamiliyMemberComponent({ onDelete, currentMember, id, props }) {
     setMembers(updatedMembers);
   };
 
-  useEffect(() => {
-    if (family.age !== "") addFamilyMember();
-  }, [familyMember.age]);
-
-  useEffect(() => {
-    getDataMembers();
-  }, []);
-
   const avatar = [];
   const [open, setOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState(avatar[1]);
@@ -88,6 +82,16 @@ function FamiliyMemberComponent({ onDelete, currentMember, id, props }) {
     setOpen(false);
     setSelectedValue(value);
   };
+
+ 
+
+  useEffect(() => {
+    if (family.age !== "") addFamilyMember();
+  }, [familyMember.age]);
+
+  useEffect(() => {
+    getDataMembers();
+  }, []);
 
   SimpleDialog.propTypes = {
     onClose: PropTypes.func.isRequired,

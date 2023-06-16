@@ -8,9 +8,9 @@ import {
 } from "@mui/material";
 import FamiliyMemberComponent from "../../../FamileMember/FamileMemberComponent";
 import { useFamily } from "../../../../context/context";
-import Modal from 'react-modal';import { useEffect } from "react";
+import { useEffect } from "react";
 
-function Families() {
+function Families({setValidation}) {
   const {
     family,
     createFamily,
@@ -39,9 +39,7 @@ function Families() {
   const handleDeleteMemberFamily = (member) => {
     if (countFamilyMembersComponent.length > 1)
       setCountFamilyMembersComponent((prevMembers) =>
-        prevMembers.filter(
-          (prevMember) => prevMember.id !== member.id
-        )
+        prevMembers.filter((prevMember) => prevMember.id !== member.id)
       );
 
     setMembers((prevMembers) =>
@@ -49,9 +47,26 @@ function Families() {
     );
   };
 
-  useEffect(() => {    
-    console.log("dsad");
-  }, []);
+  const handleDisableNextButton = (family, members) => {
+    debugger
+    let isButtonDisabled = false;
+    const hasEmptyNameMember = members.some((member) => !member.nameMember);
+
+    if (!family.familyName) {
+      isButtonDisabled = true;
+    }
+
+    if (hasEmptyNameMember) {
+      isButtonDisabled = true;
+    }
+
+    setValidation(isButtonDisabled);
+  };
+
+  useEffect(() => {
+    debugger
+    handleDisableNextButton(family, members);
+  }, [family, members]);
 
   return (
     <Stack>
@@ -98,7 +113,6 @@ function Families() {
               />
             </Box>
           ))} */}
-
       </Box>
     </Stack>
   );
