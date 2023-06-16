@@ -424,8 +424,7 @@ function App(props) {
                     <Stepper
                       alternativeLabel
                       activeStep={activeStep}
-                      connector={<ColorlibConnector 
-                      orientation={isMobile(windowSize) ? "vertical" : ""}/>}
+                      connector={<ColorlibConnector/>}
                     >
                       {getVisibleSteps().map((label) => (
                         <Step key={label}>
