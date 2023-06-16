@@ -170,8 +170,7 @@ export function FamilyContextProvider({ children }) {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
   
-  const stepFamilyValid = () => {
-    debugger
+  const stepFamilyValid = () => {    
     let hasEmptyNameMember;
    
     hasEmptyNameMember = members.some((member) => member.nameMember === "");
@@ -186,15 +185,13 @@ export function FamilyContextProvider({ children }) {
     return validation
   }
 
-  const setLocalStorage = (data) => {
-    debugger;
+  const setLocalStorage = (data) => {    
     if (data) {
       Storage.set("family", data);
     }
   };
 
-  const getLocalStorage = () => {
-    debugger;
+  const getLocalStorage = () => {    
     const family = Storage.get("family");
     if (family) {
       setFamily(family);
@@ -273,8 +270,7 @@ export function FamilyContextProvider({ children }) {
   //   downloadLink.click();
   // };
 
-  useEffect(() => {
-    debugger;
+  useEffect(() => {    
     getLocalStorage();
   }, []);
 

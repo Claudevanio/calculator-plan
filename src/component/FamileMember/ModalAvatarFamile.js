@@ -20,6 +20,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Edit } from "@mui/icons-material";
 import { Box } from "@mui/material";
 import { useWindowSize } from "../../hooks/useWindowSize";
+import { DeleteButton } from "./styles";
+import ClearIcon from "@mui/icons-material/Clear";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -79,7 +81,7 @@ function SimpleDialog(props) {
   const handleClose = () => {
     onClose(selectedValue);
   };
-
+  
   const handleListItemClick = (value) => {
     onClose(value);
   };
@@ -90,13 +92,16 @@ function SimpleDialog(props) {
 
   return (
 
-    <Dialog  onClose={handleClose} open={open}>
+    <Dialog onClose={handleClose} open={open}>
     <Box 
     width={isMobile(windowSize) ? "21rem" : "30rem"}
     sx={{ border:'5px solid black'}}>
       <Box 
       padding={isMobile(windowSize) ? "2rem 0rem 2rem 1rem" : "2rem 1rem 3rem 2rem"}
       >
+        <DeleteButton aria-label="delete" onClick={handleClose}>
+          <ClearIcon color="error" fontSize="large" />
+        </DeleteButton>
         <Typography sx={{fontSize:'35px'}}>Seleccione su avatar</Typography>
         <Typography width={isMobile(windowSize) ? "80%" : "100%"}>
           Personalice su personaje para hacer un plan que se adapte a sus
@@ -150,7 +155,7 @@ export default function SimpleDialogDemo() {
         }
       >
         <Avatar
-          sx={{ width: 56, height: 56 }}
+          sx={{ width: 75, height: 75 }}
           alt="Travis Howard"
           src={selectedValue}
         />

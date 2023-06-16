@@ -7,8 +7,7 @@ import { useEffect } from "react";
 function KindnessAndEmpathy() {
   const { datas, members, family, setLocalStorage } = useFamily();
 
-  const setDataLocalStorage = (data) => {
-    debugger;
+  const setDataLocalStorage = (data) => {    
     let familyData = {};
     if (data) {
       familyData = { ...family, familyMembers: [...members] };
@@ -32,7 +31,7 @@ function KindnessAndEmpathy() {
       <Box>
       <Grid container gap={4}>
           {datas[2].text.map((text, index) => (
-            <Grid item>
+            <Grid item xs={12}>
               <SelectPrioritesToMemberFamilyComponent
                 index={index}
                 //Enviar textos do media balance este Datas é apenas um teste

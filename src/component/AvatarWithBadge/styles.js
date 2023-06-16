@@ -12,13 +12,13 @@ export const SmallAvatar = styled(Avatar)(({ theme }) => ({
 export const StyleButtonLeft = styled(Button)(({theme}) => ({
   position: "sticky",
   top: 50,
-  height: '100px',
-  width: '200px',
+  height: '96px',
+  width: '150px',
   borderRadius: '150px 150px 0 0',
-  backgroundColor: 'green',
+  backgroundColor: '#1976d2',
   msTransform: 'rotate(-90deg)', 
   webkitTransform: 'rotate(-90deg)', 
-  transform: 'rotate(-90deg) translateY(58px) translateX(-180px)',
+  transform: 'rotate(-90deg) translateY(35px) translateX(-180px)',
   
 }))
 
@@ -44,13 +44,13 @@ export const StyleTypographyLeft = styled(Typography)(({theme}) => ({
 export const StyleButtonRight = styled(Button)(({theme}) => ({
   position: "sticky",
   top: 50,
-  height: '100px',
-  width: '200px',
+  height: '96px',
+  width: '150px',
   borderRadius: '150px 150px 0 0',
-  backgroundColor: 'green',
+  backgroundColor: '#1976d2',
   msTransform: 'rotate(90deg)', 
   webkitTransform: 'rotate(90deg)', 
-  transform: 'rotate(90deg) translateY(49px) translateX(180px)'
+  transform: 'rotate(90deg) translateY(27px) translateX(180px)'
 
 }))
 
@@ -58,13 +58,13 @@ export const StyleButtonHome = styled(Button)(({theme}) => ({
   position: 'flex',
   right: '24.3%',
   top: '17rem',
-  height: '100px',
-  width: '200px',
+  height: '96px',
+  width: '150px',
   borderRadius: '150px 150px 0 0',
-  backgroundColor: 'green',
+  backgroundColor: '#1976d2',
   msTransform: 'rotate(90deg)', 
   webkitTransform: 'rotate(90deg)', 
-  transform: 'rotate(90deg)'
+  transform: 'rotate(90deg) translateY(-9px) translateX(10px)'
 }))
 
 export const StyleTypographyRight = styled(Typography)(({theme}) => ({

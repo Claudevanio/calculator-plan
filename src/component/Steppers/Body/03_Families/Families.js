@@ -21,15 +21,13 @@ function Families() {
     generateId,
   } = useFamily();
 
-  const handleCreateFamily = (event) => {
-    debugger;
+  const handleCreateFamily = (event) => {    
     event.preventDefault();
     const familyName = event.target.value;
     createFamily(familyName);
   };
 
-  const handleCreateMemberFamilyComponent = () => {
-    debugger;
+  const handleCreateMemberFamilyComponent = () => {    
     setMembers((prevMembers) => [
       ...prevMembers,
       {
@@ -51,8 +49,7 @@ function Families() {
     );
   };
 
-  useEffect(() => {
-    debugger;
+  useEffect(() => {    
     console.log("dsad");
   }, []);
 

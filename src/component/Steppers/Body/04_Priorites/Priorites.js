@@ -17,8 +17,7 @@ function Priorities() {
     console.log(family);
   };
 
-  const setDataLocalStorage = (data) => {
-    debugger;
+  const setDataLocalStorage = (data) => {    
     let familyData = {};
     if (data) {
       familyData = { ...family, familyMembers: [...members] };
