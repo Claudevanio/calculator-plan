@@ -20,6 +20,7 @@ function SelectPrioritesToMemberFamilyComponent({ data, index }) {
   const DESKTOP_SMALL_SIZE = 1023;
 
   const { text, stepper } = data;
+  console.log(members)
 
   const handleToggle = (memberId) => {
     debugger;
@@ -81,7 +82,7 @@ function SelectPrioritesToMemberFamilyComponent({ data, index }) {
       console.log(member[stepper])
       console.log(teste)
       console.log(teste2)
-      const isSelected = member[stepper].topicos.includes(text[index]);
+      const isSelected = member[stepper].includes(text[index]);
       initialMemberSelected[member.id] = isSelected;
     });
 
