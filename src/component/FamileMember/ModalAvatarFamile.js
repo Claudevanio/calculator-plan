@@ -19,6 +19,7 @@ import { Stack } from "react-bootstrap";
 import EditIcon from "@mui/icons-material/Edit";
 import { Edit } from "@mui/icons-material";
 import { Box } from "@mui/material";
+import { useWindowSize } from "../../hooks/useWindowSize";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -48,6 +49,8 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     },
   },
 }));
+
+
 
 const SmallAvatar = styled(Avatar)(({ theme }) => ({
   width: 22,
@@ -81,13 +84,21 @@ function SimpleDialog(props) {
     onClose(value);
   };
 
+  const windowSize = useWindowSize();
+  const DESKTOP_SMALL_SIZE = 1023;
+  const isMobile = (windowSize) => windowSize.width <= DESKTOP_SMALL_SIZE;
+
   return (
 
     <Dialog  onClose={handleClose} open={open}>
-    <Box sx={{ border:'5px solid black', width:'30rem'}}>
-      <Box sx={{padding: '2rem 1rem 3rem 2rem'}}>
+    <Box 
+    width={isMobile(windowSize) ? "21rem" : "30rem"}
+    sx={{ border:'5px solid black'}}>
+      <Box 
+      padding={isMobile(windowSize) ? "2rem 0rem 2rem 1rem" : "2rem 1rem 3rem 2rem"}
+      >
         <Typography sx={{fontSize:'35px'}}>Seleccione su avatar</Typography>
-        <Typography >
+        <Typography width={isMobile(windowSize) ? "80%" : ""}>
           Personalice su personaje para hacer un plan que se adapte a sus
           necesidades
         </Typography>

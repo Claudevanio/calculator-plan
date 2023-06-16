@@ -60,11 +60,20 @@ import MobileFriendlyIcon from "@mui/icons-material/MobileFriendly";
 import FamilyRestroomIcon from "@mui/icons-material/FamilyRestroom";
 import PrintIcon from "@mui/icons-material/Print";
 
+
 function App(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { handleNext, handleBack,  activeStep, setActiveStep } = useFamily();
+  const { handleNext, handleBack,  activeStep, setActiveStep, family, member } = useFamily(); 
 
+
+  const stepFamilyValid = () => {
+    if(activeStep === 12){
+      return true
+    }
+    return false
+
+  }
   const container =
     window !== undefined ? () => window().document.body : undefined;
   const drawerWidth = 240;
@@ -415,7 +424,8 @@ function App(props) {
                     <Stepper
                       alternativeLabel
                       activeStep={activeStep}
-                      connector={<ColorlibConnector />}
+                      connector={<ColorlibConnector 
+                      orientation={isMobile(windowSize) ? "vertical" : ""}/>}
                     >
                       {getVisibleSteps().map((label) => (
                         <Step key={label}>
@@ -469,7 +479,7 @@ function App(props) {
               </Box>
               <StyleBoxMobileButton 
               sx={{ position: "relative" }}>
-                <StyleButtonRight variant="contained"  disabled={activeStep === 12} onClick={handleNext}>
+                <StyleButtonRight variant="contained"  disabled={stepFamilyValid()} onClick={handleNext}>
                   <StyleTypographyRight>
                     <Box>
                       <Typography>
@@ -492,6 +502,7 @@ function App(props) {
     </Box>
   );
 }
+
 
 const Step1Component = () => {
   return <Home></Home>;

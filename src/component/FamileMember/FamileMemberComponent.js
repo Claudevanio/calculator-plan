@@ -30,7 +30,6 @@ function FamiliyMemberComponent({ onDelete, id, props }) {
     if (currentMember) {
       setFamilyMember(currentMember);
     }
-    console.log(members);
   };
 
   const windowSize = useWindowSize();
