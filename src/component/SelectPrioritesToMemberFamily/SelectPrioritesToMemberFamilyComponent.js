@@ -95,7 +95,7 @@ function SelectPrioritesToMemberFamilyComponent({ data, index }) {
       borderRadius={1}
       padding={2}
     >
-      <Box sx={{ maxWidth: "55%" }}>
+      <Box >
         <Stack direction="row">
           <SelfImprovementIcon fontSize="large" color="success" />
           <Stack>
@@ -105,7 +105,7 @@ function SelectPrioritesToMemberFamilyComponent({ data, index }) {
               <Button variant="outlined"> UnselectAll </Button>
             </Box>
           </Stack>
-        </Stack>
+        </Stack >
       </Box>
 
       <Box sx={{ maxHeight: "45%" }}>

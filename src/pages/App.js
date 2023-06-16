@@ -60,11 +60,20 @@ import MobileFriendlyIcon from "@mui/icons-material/MobileFriendly";
 import FamilyRestroomIcon from "@mui/icons-material/FamilyRestroom";
 import PrintIcon from "@mui/icons-material/Print";
 
+
 function App(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { handleNext, handleBack,  activeStep, setActiveStep } = useFamily();
+  const { handleNext, handleBack,  activeStep, setActiveStep, family, member } = useFamily(); 
 
+
+  const stepFamilyValid = () => {
+    if(activeStep === 12){
+      return true
+    }
+    return false
+
+  }
   const container =
     window !== undefined ? () => window().document.body : undefined;
   const drawerWidth = 240;
@@ -73,8 +82,6 @@ function App(props) {
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
-
-
 
   const steps = [
     "Home",
@@ -258,6 +265,8 @@ function App(props) {
         return <Step10ComponentHeader />;
       case 11:
         return <Step11ComponentHeader />;
+      case 12:
+          return <Step12ComponentHeader />;  
       default:
         return null;
     }
@@ -408,14 +417,15 @@ function App(props) {
                   </StyleTypographyLeft>
                 </StyleButtonLeft>
               </StyleBoxMobileButton>
-              <Box sx={{ background: "white" }}>
+              <Box sx={{ background: "#FAFAEF" }}>
                 {renderStepContentHeader(activeStep)}
                 <Box>
-                  <Box sx={{ marginTop: "2rem", background: "white" }}>
+                  <Box sx={{ marginTop: "2rem", background: "#FAFAEF" }}>
                     <Stepper
                       alternativeLabel
                       activeStep={activeStep}
-                      connector={<ColorlibConnector />}
+                      connector={<ColorlibConnector 
+                      orientation={isMobile(windowSize) ? "vertical" : ""}/>}
                     >
                       {getVisibleSteps().map((label) => (
                         <Step key={label}>
@@ -467,8 +477,9 @@ function App(props) {
                   </Box>
                 </Box>
               </Box>
-              <StyleBoxMobileButton sx={{ position: "relative" }}>
-                <StyleButtonRight variant="contained" onClick={handleNext}>
+              <StyleBoxMobileButton 
+              sx={{ position: "relative" }}>
+                <StyleButtonRight variant="contained"  disabled={stepFamilyValid()} onClick={handleNext}>
                   <StyleTypographyRight>
                     <Box>
                       <Typography>
@@ -491,6 +502,7 @@ function App(props) {
     </Box>
   );
 }
+
 
 const Step1Component = () => {
   return <Home></Home>;
@@ -644,6 +656,38 @@ const Step11ComponentHeader = () => {
         build bonds, promote learning and show your child that you care about
         what matters to them.
       </Typography>
+    </Box>
+  );
+};
+
+
+const Step12ComponentHeader = () => {
+  return (
+    <Box sx={{ padding: "2rem", background: "#D5D3C1" }}>
+      <Typography variant="h4">Plan familiar de uso de pantallas de</Typography>
+      <Box sx={{ marginTop: "2rem", marginBottom: "2rem" }}>
+        <Typography>
+            Felicitaciones en la creación de su plan familiar de uso de pantallas! 
+            No olvide desplazarse hasta la parte superior de la página para imprimirlo y 
+            colocarlo en un lugar donde todos en la familia puedan verlo. También puede 
+            enviarlo por correo electrónico o compartir su plan. Vuelva a revisar su plan 
+            familiar con la frecuencia que necesite, como al comienzo​ de cada año escolar
+            o durante las vacaciones de verano y feriados.
+          ​</Typography>
+          <Typography>
+            Fuente: American Academy of Pediatrics (Copyright © 2022) - Consejo de Comunicaciones y Medios​
+          </Typography>
+          <Typography>
+            Autores principales: Jenny Radesky, MD, FAAP; Megan A. Moreno, MD, MSEd, MPH, FAAP; Suzy Tomopoulos MD, FAAP. 
+          </Typography>
+          <Typography>
+            Colaboradores: Corinn Cross, MD, FAAP; Yolanda (Linda) Reid Chassiakos, MD, FAAP; Dimitri Christakis, MD, MPH, FAAP. 
+          </Typography>
+          <Typography>
+           ​​​La información contenida en este sitio web no debe utilizarse como sustituto de la atención médica y el consejo de su pediatra.
+           Puede haber variaciones en el tratamiento que su pediatra puede recomendar en función de los hechos y circunstancias individuales​. 
+          </Typography>
+      </Box>
     </Box>
   );
 };

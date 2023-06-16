@@ -33,7 +33,7 @@ function MediaBalance() {
       <Box>
         <Grid container gap={4}>
           {datas[0].text.map((text, index) => (
-            <Grid item>
+            <Grid item xs={12}>
               <SelectPrioritesToMemberFamilyComponent
                 index={index}
                 //Enviar textos do media balance este Datas é apenas um teste

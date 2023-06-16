@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import FamiliyMemberComponent from "../../../FamileMember/FamileMemberComponent";
 import { useFamily } from "../../../../context/context";
-import { useEffect } from "react";
+import Modal from 'react-modal';import { useEffect } from "react";
 
 function Families() {
   const {

@@ -151,8 +151,7 @@ export function FamilyContextProvider({ children }) {
     useState([{ id: generateId() }, { id: generateId() }]);
   const [isDisableNextButton, setIsDisableNextButton] = useState(false);
 
-  const createFamily = (nameFamily) => {
-    debugger;
+  const createFamily = (nameFamily) => {   
     const familyModel = new Family(nameFamily);
     setFamily(familyModel);
     console.log(family);
