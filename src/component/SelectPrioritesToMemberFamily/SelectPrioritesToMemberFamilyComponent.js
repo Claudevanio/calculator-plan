@@ -9,47 +9,82 @@ import {
   Typography,
 } from "@mui/material";
 import { useFamily } from "../../context/context";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function SelectPrioritesToMemberFamilyComponent({ data }) {
+function SelectPrioritesToMemberFamilyComponent({ data, index }) {
   const { members, setMembers } = useFamily();
+  const [selectedButtons, setSelectedButtons] = useState([]);
   const windowSize = useWindowSize();
 
-  const DESKTOP_SMALL_SIZE = 1023;
   const isMobile = (windowSize) => windowSize.width <= DESKTOP_SMALL_SIZE;
-  //PassarSteppers no lugar do mediaBalance na linha 31 e 32
-  const { text, stepper } = data;
+  const DESKTOP_SMALL_SIZE = 1023;
 
-  const [selectedButtons, setSelectedButtons] = useState([]);
+  const { text, stepper } = data;
+  let currentStepper = stepper;
+
+  console.log(data);
+  console.log(stepper);
 
   const handleToggle = (memberId) => {
+    debugger;
+
+    setMemberSelected((prevMemberSelected) => {
+      const isSelected = !prevMemberSelected[memberId];
+      return {
+        ...prevMemberSelected,
+        [memberId]: isSelected,
+      };
+    });
+
     setMembers((prevMembers) => {
       return prevMembers.map((member) => {
+        debugger;
         if (member.id === memberId) {
-          // Verificar se o valor já existe no array mediaBalance do membro
-          const mediaBalance = member.mediaBalance.includes(text[0])
-            ? member.mediaBalance.filter((value) => value !== text[0])
-            : [...member.mediaBalance, text[0]];
+          debugger;
 
+          // Verificar se o valor já existe no array mediaBalance do membro
+          const section = member[currentStepper].includes(text[index])
+            ? member[currentStepper].filter((value) => value !== text[index])
+            : [...member[currentStepper], text[index]];
+          console.log(section);
+
+          if (section) setSelectedButtons(true);
+
+          if (!section) setSelectedButtons(false);
           // Atualizar a propriedade mediaBalance do membro encontrado
           return {
             ...member,
-            mediaBalance: mediaBalance,
+            [currentStepper]: section,
           };
         }
+
         return member;
       });
     });
 
-    console.log(members);
-
     if (!selectedButtons.includes(memberId)) {
     }
+
     setSelectedButtons([...selectedButtons, memberId]);
 
     if (selectedButtons.includes(memberId))
       setSelectedButtons(selectedButtons.filter((id) => id !== memberId));
   };
+
+  const [memberSelected, setMemberSelected] = useState({});
+
+  // ...
+
+  useEffect(() => {
+    const initialMemberSelected = {};
+
+    members.forEach((member) => {
+      const isSelected = member[currentStepper].includes(text[index]);
+      initialMemberSelected[member.id] = isSelected;
+    });
+
+    setMemberSelected(initialMemberSelected);
+  }, [members, text, index]);
 
   return (
     <Box
@@ -64,7 +99,7 @@ function SelectPrioritesToMemberFamilyComponent({ data }) {
         <Stack direction="row">
           <SelfImprovementIcon fontSize="large" color="success" />
           <Stack>
-            <Typography variant="h6"> {text[0]} </Typography>
+            <Typography variant="h6"> {text[index]} </Typography>
             <Box>
               <Button variant="outlined"> Reason / Tips</Button>
               <Button variant="outlined"> UnselectAll </Button>
@@ -78,7 +113,7 @@ function SelectPrioritesToMemberFamilyComponent({ data }) {
           {members.map((member, index) => (
             <Grid item key={index}>
               <ToggleButton
-                selected={selectedButtons.includes(member.id)}
+                selected={memberSelected[member.id]}
                 onChange={() => handleToggle(member.id)}
                 sx={{ textTransform: "none", minWidth: "10rem" }}
               >

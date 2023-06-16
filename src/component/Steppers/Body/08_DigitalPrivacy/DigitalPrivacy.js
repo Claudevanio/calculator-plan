@@ -2,9 +2,25 @@ import { Box, Grid, Typography } from "@mui/material";
 import AddTaskIcon from "@mui/icons-material/AddTask";
 import SelectPrioritesToMemberFamilyComponent from "../../../SelectPrioritesToMemberFamily/SelectPrioritesToMemberFamilyComponent";
 import { useFamily } from "../../../../context/context";
+import { useEffect } from "react";
 
 function DigitalPrivacy() {
-  const { datas } = useFamily();
+
+  const { datas, members, family, setLocalStorage } = useFamily();
+
+  const setDataLocalStorage = (data) => {
+    debugger;
+    let familyData = {};
+    if (data) {
+      familyData = { ...family, familyMembers: [...members] };
+      setLocalStorage(familyData);
+    }
+  };
+
+  useEffect(() => {
+    setDataLocalStorage(family);
+  }, []);
+
   return (
     <Box>
       <Box>
@@ -16,11 +32,16 @@ function DigitalPrivacy() {
       </Box>
 
       <Box>
-        <Grid container gap={4}>
-          <Grid item xs={12}>
-            {" "}
-            <SelectPrioritesToMemberFamilyComponent data={datas[0]} />{" "}
-          </Grid>{" "}
+      <Grid container gap={4}>
+          {datas[3].text.map((text, index) => (
+            <Grid item>
+              <SelectPrioritesToMemberFamilyComponent
+                index={index}
+                //Enviar textos do media balance este Datas é apenas um teste
+                data={datas[3]}
+              />{" "}
+            </Grid>
+          ))}
         </Grid>
       </Box>
     </Box>

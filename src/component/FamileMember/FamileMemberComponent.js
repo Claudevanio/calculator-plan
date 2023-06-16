@@ -18,8 +18,8 @@ import { useFamily } from "../../context/context";
 import { StyleToggleButton } from "../AvatarWithBadge/styles";
 import ClearIcon from "@mui/icons-material/Clear";
 
-function FamiliyMemberComponent({ onDelete, id }) {
-  const { setMembers, members, hasThisFamilyMember } = useFamily();
+function FamiliyMemberComponent({ onDelete, currentMember, id }) {
+  const { setMembers, members, hasThisFamilyMember, family } = useFamily();
   const [familyMember, setFamilyMember] = useState({ nameMember: "", age: "" });
 
   const getDataMembers = () => {
@@ -37,39 +37,47 @@ function FamiliyMemberComponent({ onDelete, id }) {
 
   const handleDataMemberChange = (field, value) => {
     setFamilyMember((prevMember) => ({ ...prevMember, [field]: value }));
-    console.log(familyMember)
   };
 
   const addFamilyMember = () => {
-    debugger
-    const hasId = hasThisFamilyMember(id);
+    debugger;
+    const hasId = hasThisFamilyMember(currentMember.id);
+    let newMember;
 
-    const newMember = new FamilyMember(
-      id,
-      familyMember.nameMember,
-      familyMember.age
-    );
+    if (members.length === 0) {
+      newMember = new FamilyMember(
+        currentMember.id,
+        familyMember.nameMember,
+        familyMember.age
+      );
+    }
+
+    if (members.length > 0) {
+      newMember = new FamilyMember(
+        currentMember.id,
+        familyMember.nameMember,
+        familyMember.age
+      );
+    }
 
     if (!hasId) {
-      members.push(newMember);
+      const updatedMembers = [...members, newMember];
+      setMembers(updatedMembers);
       return;
     }
 
     let updatedMembers = members.map((member) => {
-      debugger
-      if (member.id == id && member !== newMember) {
+      debugger;
+      if (member.id == currentMember.id && member !== newMember) {
         return { ...member, ...newMember };
       }
       return member;
     });
-    setMembers(
-      updatedMembers
-      //localStorage.setItem('familyMembers', members.toString())
-    );
+    setMembers(updatedMembers);
   };
 
   useEffect(() => {
-    addFamilyMember();
+    if (family.age !== "") addFamilyMember();
   }, [familyMember.age]);
 
   useEffect(() => {
@@ -121,8 +129,10 @@ function FamiliyMemberComponent({ onDelete, id }) {
         <ToggleButtonGroup
           sx={{ height: "3.5rem" }}
           exclusive
-          value={familyMember.age}
-          onChange={(_, value) => handleDataMemberChange("age", value)}
+          value={currentMember ? currentMember.age : familyMember.age}
+          onChange={(_, value) => {
+            handleDataMemberChange("age", value);
+          }}
         >
           <StyleToggleButton value="0-24"> 0-24 months</StyleToggleButton>
           <StyleToggleButton value="2-3"> 2-3 years</StyleToggleButton>

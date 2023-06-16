@@ -1,7 +1,24 @@
 import { Box, Button, Stack } from "@mui/material";
 import MyPDFViewer from "../../../pdf/pdfView";
+import { useFamily } from "../../../../context/context";
+import { useEffect } from "react";
 
 function Review() {
+  const {  members, family, setLocalStorage } = useFamily();
+
+  const setDataLocalStorage = (data) => {
+    debugger;
+    let familyData = {};
+    if (data) {
+      familyData = { ...family, familyMembers: [...members] };
+      setLocalStorage(familyData);
+    }
+  };
+
+  useEffect(() => {
+    setDataLocalStorage(family);
+  }, []);
+
   const data = {
     familyName: "Undefined",
     hasMediaBalance: true,
@@ -71,7 +88,7 @@ function Review() {
   };
 
   return (
-    <Box sx={{ width: "100%", height: "100%"}}>
+    <Box sx={{ width: "100%", height: "100%" }}>
       {data.familyMembers.map((member, index) => (
         <MyPDFViewer key={index} family={data} member={member} />
       ))}

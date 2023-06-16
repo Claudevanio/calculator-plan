@@ -2,9 +2,24 @@ import { Box, Grid, Typography } from "@mui/material";
 import PersonSearchIcon from "@mui/icons-material/PersonSearch";
 import SelectPrioritesToMemberFamilyComponent from "../../../SelectPrioritesToMemberFamily/SelectPrioritesToMemberFamilyComponent";
 import { useFamily } from "../../../../context/context";
+import { useEffect } from "react";
 
 function CommunicatingAboutMedia() {
-  const { datas } = useFamily();
+  const { datas, members, family, setLocalStorage } = useFamily();
+
+  const setDataLocalStorage = (data) => {
+    debugger;
+    let familyData = {};
+    if (data) {
+      familyData = { ...family, familyMembers: [...members] };
+      setLocalStorage(familyData);
+    }
+  };
+
+  useEffect(() => {
+    setDataLocalStorage(family);
+  }, []);
+
   return (
     <Box>
       <Box>
@@ -16,11 +31,16 @@ function CommunicatingAboutMedia() {
       </Box>
 
       <Box>
-        <Grid container gap={4}>
-          <Grid item>
-            {" "}
-            <SelectPrioritesToMemberFamilyComponent data={datas[1]} />{" "}
-          </Grid>
+      <Grid container gap={4}>
+          {datas[1].text.map((text, index) => (
+            <Grid item>
+              <SelectPrioritesToMemberFamilyComponent
+                index={index}
+                //Enviar textos do media balance este Datas é apenas um teste
+                data={datas[1]}
+              />{" "}
+            </Grid>
+          ))}
         </Grid>
       </Box>
     </Box>
