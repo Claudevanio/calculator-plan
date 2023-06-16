@@ -2,9 +2,24 @@ import { Box, Grid, Typography } from "@mui/material";
 import SlideshowOutlinedIcon from "@mui/icons-material/SlideshowOutlined";
 import SelectPrioritesToMemberFamilyComponent from "../../../SelectPrioritesToMemberFamily/SelectPrioritesToMemberFamilyComponent";
 import { useFamily } from "../../../../context/context";
+import { useEffect } from "react";
 
 function UsingMediaTogether() {
-  const { datas } = useFamily();
+  const { datas, members, family, setLocalStorage } = useFamily();
+
+  const setDataLocalStorage = (data) => {
+    debugger;
+    let familyData = {};
+    if (data) {
+      familyData = { ...family, familyMembers: [...members] };
+      setLocalStorage(familyData);
+    }
+  };
+
+  useEffect(() => {
+    setDataLocalStorage(family);
+  }, []);
+
   return (
     <Box>
       <Box>
@@ -16,10 +31,16 @@ function UsingMediaTogether() {
       </Box>
 
       <Box>
-        <Grid container gap={4}>
-          <Grid item xs={12}>
-            <SelectPrioritesToMemberFamilyComponent data={datas[0]} />{" "}
-          </Grid>
+      <Grid container gap={4}>
+          {datas[7].text.map((text, index) => (
+            <Grid item>
+              <SelectPrioritesToMemberFamilyComponent
+                index={index}
+                //Enviar textos do media balance este Datas é apenas um teste
+                data={datas[7]}
+              />{" "}
+            </Grid>
+          ))}
         </Grid>
       </Box>
     </Box>

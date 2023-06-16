@@ -18,12 +18,11 @@ import { useFamily } from "../../context/context";
 import { StyleToggleButton } from "../AvatarWithBadge/styles";
 import ClearIcon from "@mui/icons-material/Clear";
 import SimpleDialog from "./ModalAvatarFamile";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-function FamiliyMemberComponent({ onDelete, id, props }) {
-  const { setMembers, members, hasThisFamilyMember } = useFamily();
+function FamiliyMemberComponent({ onDelete, currentMember, id, props }) {
+  const { setMembers, members, hasThisFamilyMember, family } = useFamily();
   const [familyMember, setFamilyMember] = useState({ nameMember: "", age: "" });
-  
 
   const getDataMembers = () => {
     const currentMember = members.find((member) => member.id === id);
@@ -39,43 +38,46 @@ function FamiliyMemberComponent({ onDelete, id, props }) {
 
   const handleDataMemberChange = (field, value) => {
     setFamilyMember((prevMember) => ({ ...prevMember, [field]: value }));
-    console.log(familyMember)
   };
 
-  const addFamilyMember = () => {    
+  const addFamilyMember = () => {
+    debugger;
     const hasId = hasThisFamilyMember(id);
 
-    const newMember = new FamilyMember(
-      id,
-      familyMember.nameMember,
-      familyMember.age
-    );
+    let newMember;
+
+    if (members.length > 0) {
+      newMember = new FamilyMember(
+        currentMember.id,
+        familyMember.nameMember,
+        familyMember.age
+      );
+    }
 
     if (!hasId) {
-      members.push(newMember);
+      const updatedMembers = [...members, newMember];
+      setMembers(updatedMembers);
       return;
     }
 
-    let updatedMembers = members.map((member) => {     
+    let updatedMembers = members.map((member) => {
+      debugger;
       if (member.id == id && member !== newMember) {
         return { ...member, ...newMember };
       }
       return member;
     });
-    setMembers(
-      updatedMembers
-      //localStorage.setItem('familyMembers', members.toString())
-    );
+    setMembers(updatedMembers);
   };
 
   useEffect(() => {
-    addFamilyMember();
+    if (family.age !== "") addFamilyMember();
   }, [familyMember.age]);
 
   useEffect(() => {
     getDataMembers();
   }, []);
-  
+
   const avatar = [];
   const [open, setOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState(avatar[1]);
@@ -105,14 +107,20 @@ function FamiliyMemberComponent({ onDelete, id, props }) {
       padding={1}
       gap={2}
     >
-      <Stack 
-      width={isMobile(windowSize) ? "100%" : "49%"}
-      sx={{marginTop: '12px'}} direction="row" alignItems="center" gap={4}>
-   
-      <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} />
-   
+      <Stack
+        width={isMobile(windowSize) ? "100%" : "49%"}
+        sx={{ marginTop: "12px" }}
+        direction="row"
+        alignItems="center"
+        gap={4}
+      >
+        <SimpleDialog
+          selectedValue={selectedValue}
+          open={open}
+          onClose={handleClose}
+        />
 
-        <Box sx={{marginTop: '12px'}}>
+        <Box sx={{ marginTop: "12px" }}>
           <TextField
             id="name-member-input"
             value={familyMember.nameMember}
@@ -124,14 +132,14 @@ function FamiliyMemberComponent({ onDelete, id, props }) {
           />
         </Box>
       </Stack>
-      
+
       <DeleteButton aria-label="delete" onClick={onDelete}>
         <ClearIcon color="error" fontSize="large" />
       </DeleteButton>
 
-      <Box sx={{display:'flex'}}>      
+      <Box sx={{ display: "flex" }}>
         <Box>
-        <Typography>Age</Typography>
+          <Typography>Age</Typography>
           <ToggleButtonGroup
             sx={{ height: "3.5rem" }}
             exclusive
@@ -145,7 +153,7 @@ function FamiliyMemberComponent({ onDelete, id, props }) {
             <StyleToggleButton value="adult"> Adult </StyleToggleButton>
           </ToggleButtonGroup>
         </Box>
-        <Box sx={{marginTop: '2rem'}}>
+        <Box sx={{ marginTop: "2rem" }}>
           <DeleteButtonDesktop
             flexDirection={isMobile(windowSize) ? "column" : "row"}
             aria-label="delete"

@@ -1,6 +1,6 @@
-import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import { createContext, useState, useEffect, useContext } from "react";
 import Family from "../entities/family";
+import { Storage } from "../component/utils/Storage";
 
 export const FamilyContext = createContext({});
 
@@ -10,7 +10,10 @@ const generateId = () => Math.random() * 10_000_000;
 
 export function FamilyContextProvider({ children }) {
   const [family, setFamily] = useState({});
-  const [members, setMembers] = useState([]);
+  const [members, setMembers] = useState([
+    { id: generateId() },
+    { id: generateId() },
+  ]);
   const [datas, setDatas] = useState([
     {
       stepper: "mediaBalance",
@@ -146,7 +149,7 @@ export function FamilyContextProvider({ children }) {
 
   const [idMembers, setIdMembers] = useState(1);
   const [countFamilyMembersComponent, setCountFamilyMembersComponent] =
-    useState([{ internalId: generateId() }, { internalId: generateId() }]);
+    useState([{ id: generateId() }, { id: generateId() }]);
   const [isDisableNextButton, setIsDisableNextButton] = useState(false);
 
   const createFamily = (nameFamily) => {   
@@ -159,30 +162,14 @@ export function FamilyContextProvider({ children }) {
     return members.some((member) => member.id === id);
   };
 
-  const handleNext = () => {    
-    // if (activeStep === 13) {
-    //   for (let index = 0; index <= members.length; index++) {
-    //     createPDF(family, members[index]);
-    //   }
-    // }
-    // if (activeStep === 11) {
-    //   console.log("entreiaqui");
-    //   console.log(members);
-    //   createPDF(family, members[0]);
-    // }
-    // if (activeStep === 3) {
-    //   console.log(members);
-    // }
-    // console.log(members);
-    // console.log(activeStep);
+  const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-
-
+  
   const stepFamilyValid = () => {
     debugger
     let hasEmptyNameMember;
@@ -199,6 +186,25 @@ export function FamilyContextProvider({ children }) {
     return validation
   }
 
+  const setLocalStorage = (data) => {
+    debugger;
+    if (data) {
+      Storage.set("family", data);
+    }
+  };
+
+  const getLocalStorage = () => {
+    debugger;
+    const family = Storage.get("family");
+    if (family) {
+      setFamily(family);
+
+      const updatedMembers = family.familyMembers.map((member) => member);
+      if (updatedMembers) setMembers(updatedMembers);
+    }
+  };
+
+
   const disableNextButton = () => {
     let hasEmptyNameMember;
 
@@ -209,10 +215,6 @@ export function FamilyContextProvider({ children }) {
     if (hasEmptyNameMember) {
     }
   };
-
-  // const createPDF = async (object) => {
-  //   // Crie um novo documento PDF
-  //   const pdfDoc = PDFDocument.create();
 
   //   // Adicione uma página em branco ao documento
   //   const page = pdfDoc.addPage();
@@ -272,8 +274,10 @@ export function FamilyContextProvider({ children }) {
   // };
 
   useEffect(() => {
-    disableNextButton();
+    debugger;
+    getLocalStorage();
   }, []);
+
 
   useEffect(() => {
     console.log(family);
@@ -284,6 +288,12 @@ export function FamilyContextProvider({ children }) {
     stepFamilyValid()
   }, [family, members]);
 
+
+
+  // useEffect(() => {
+  //   debugger;
+  //   disableNextButton();
+  // }, []);
 
 
   return (
@@ -299,16 +309,17 @@ export function FamilyContextProvider({ children }) {
         validation,
         setIsDisableNextButton,
         setMembers,
+        setFamily,
         createFamily,
         hasThisFamilyMember,
         setIdMembers,
         setCountFamilyMembersComponent,
         generateId,
-        setFamily,
         handleNext,
         handleBack,
         setActiveStep,
-        stepFamilyValid
+        stepFamilyValid,
+        setLocalStorage
       }}
     >
       {children}

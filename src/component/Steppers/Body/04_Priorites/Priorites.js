@@ -5,16 +5,25 @@ import { StyleGrid } from "../../../AvatarWithBadge/styles";
 import { useEffect, useState } from "react";
 
 function Priorities() {
-  const { family, setFamily } = useFamily();
+  const { family, members, setFamily, setLocalStorage } = useFamily();
   const [hasFalseValue, setHasFalseValue] = useState(true);
 
+
   const handleSelect = (prop, value) => {
-    console.log("Dei um salve aqui")
     setFamily((prevFamily) => ({
       ...prevFamily,
       [prop]: value,
     }));
-    console.log(family)
+    console.log(family);
+  };
+
+  const setDataLocalStorage = (data) => {
+    debugger;
+    let familyData = {};
+    if (data) {
+      familyData = { ...family, familyMembers: [...members] };
+      setLocalStorage(familyData);
+    }
   };
 
   const checkFalseValue = (object) => {    
@@ -25,8 +34,8 @@ function Priorities() {
   };
 
   const handleUnselectAll = () => {
-    console.log("Dei um salve aqui")
-    
+    console.log("Dei um salve aqui");
+
     const hasFalseValue = checkFalseValue(family);
     console.log(hasFalseValue);
     const updatedFamily = { ...family };
@@ -52,9 +61,13 @@ function Priorities() {
 
   useEffect(() => {
     const hasFalseValue = checkFalseValue(family);
-
+    console.log(members)
     setHasFalseValue(hasFalseValue);
   }, [family]);
+
+  useEffect(() => {
+    setDataLocalStorage(family);
+  }, []);
 
   return (
     <Box>
@@ -66,7 +79,7 @@ function Priorities() {
         <Divider variant="middle" />
         <Box>
           <Grid container gap={8}>
-            <StyleGrid item >
+            <StyleGrid item>
               <CheckBoxPriorites
                 isChecked={family.hasMediaBalance}
                 onSelect={(value) => handleSelect("hasMediaBalance", value)}
@@ -74,7 +87,7 @@ function Priorities() {
                 text="Whether at home, school or work, we are surrounded by media and digital devices. At the same time, we know that face-to-face time with family, friends and teachers is important to a child’s learning and healthy development."
               />
             </StyleGrid>
-            <StyleGrid item >
+            <StyleGrid item>
               <CheckBoxPriorites
                 isChecked={family.hasCommunicatingAboutMedia}
                 onSelect={(value) =>
@@ -84,7 +97,7 @@ function Priorities() {
                 text="​Media shouldn’t be a taboo topic. It’s all around us, so we have to talk​ about it. The more you discuss it as part of your daily routine — in the car, dinner table or at a regular "
               />
             </StyleGrid>
-            <StyleGrid item >
+            <StyleGrid item>
               <CheckBoxPriorites
                 isChecked={family.hasKindnessEmpathy}
                 onSelect={(value) => handleSelect("hasKindnessEmpathy", value)}
@@ -92,7 +105,7 @@ function Priorities() {
                 text="​Having family expectations about being kind and understanding of others — both online and off — is key to healthy, respectful relationships and positive media use. "
               />
             </StyleGrid>
-            <StyleGrid item >
+            <StyleGrid item>
               <CheckBoxPriorites
                 isChecked={family.hasDigitalPrivacySafety}
                 onSelect={(value) =>
@@ -102,7 +115,7 @@ function Priorities() {
                 text="​The internet is still a bit like the Wild West. Certainly, it is not always designed with kids in mind. Talking about digital safety rules can help your child navigate the digital landscape. You can also use a combination of tools: privacy settings, reporting and flagging inappropriate content and ongoing conversations about online behavior. ​"
               />
             </StyleGrid>
-            <StyleGrid item >
+            <StyleGrid item>
               <CheckBoxPriorites
                 isChecked={family.hasScreenFreeZones}
                 onSelect={(value) => handleSelect("hasScreenFreeZones", value)}
@@ -110,7 +123,7 @@ function Priorities() {
                 text="​Having areas of your home remain screen-free benefits a child's health and development in many ways. A big part of this is understanding and agreeing as a family where screens are not allowed."
               />
             </StyleGrid>
-            <StyleGrid item >
+            <StyleGrid item>
               <CheckBoxPriorites
                 isChecked={family.hasScreenFreeTimes}
                 onSelect={(value) => handleSelect("hasScreenFreeTimes", value)}
@@ -118,7 +131,7 @@ function Priorities() {
                 text="​Screens don't have to be in every moment and every space of our day, trying to grab everyone's attention. Carving out time for family conversations and play is really important for your child’s health and development. "
               />
             </StyleGrid>
-            <StyleGrid item >
+            <StyleGrid item>
               <CheckBoxPriorites
                 isChecked={family.hasChosingGoodContent}
                 onSelect={(value) =>
@@ -128,7 +141,7 @@ function Priorities() {
                 text="​​​​​There are millions of shows, apps and video games​ trying to get your family’s attention. Finding content that is a good fit with your family can take work. However, it’s worth it to find media that gives your child creative experiences, positive role models and true enjoyment.​"
               />
             </StyleGrid>
-            <StyleGrid item >
+            <StyleGrid item>
               <CheckBoxPriorites
                 isChecked={family.hasUsingMediaTogether}
                 onSelect={(value) =>

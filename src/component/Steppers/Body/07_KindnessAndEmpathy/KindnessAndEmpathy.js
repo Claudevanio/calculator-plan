@@ -2,9 +2,24 @@ import { Box, Grid, Typography } from "@mui/material";
 import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 import SelectPrioritesToMemberFamilyComponent from "../../../SelectPrioritesToMemberFamily/SelectPrioritesToMemberFamilyComponent";
 import { useFamily } from "../../../../context/context";
+import { useEffect } from "react";
 
 function KindnessAndEmpathy() {
-  const { datas } = useFamily();
+  const { datas, members, family, setLocalStorage } = useFamily();
+
+  const setDataLocalStorage = (data) => {
+    debugger;
+    let familyData = {};
+    if (data) {
+      familyData = { ...family, familyMembers: [...members] };
+      setLocalStorage(familyData);
+    }
+  };
+
+  useEffect(() => {
+    setDataLocalStorage(family);
+  }, []);
+
   return (
     <Grid>
       <Box>
@@ -15,11 +30,16 @@ function KindnessAndEmpathy() {
         </Typography>
       </Box>
       <Box>
-        <Grid container gap={4}>
-          <Grid item xs={12}>
-            {" "}
-            <SelectPrioritesToMemberFamilyComponent data={datas[1]} />{" "}
-          </Grid>{" "}
+      <Grid container gap={4}>
+          {datas[2].text.map((text, index) => (
+            <Grid item>
+              <SelectPrioritesToMemberFamilyComponent
+                index={index}
+                //Enviar textos do media balance este Datas é apenas um teste
+                data={datas[2]}
+              />{" "}
+            </Grid>
+          ))}
         </Grid>
       </Box>
     </Grid>

@@ -3,14 +3,14 @@ class FamilyMember {
       this.id = id;
       this.nameMember = nameMember;
       this.age = age;
-      this.mediaBalance = {};
-      this.communicatingAboutMedia = {};
-      this.kindnessEmpathy = {};
-      this.digitalPrivacySafety = {};
-      this.screenFreeZones = {};
-      this.screenFreeTimes = {};
-      this.chosingGoodContent = {};
-      this.usingMediaTogether = {};
+      this.mediaBalance = [];
+      this.communicatingAboutMedia = [];
+      this.kindnessEmpathy = [];
+      this.digitalPrivacySafety = [];
+      this.screenFreeZones = [];
+      this.screenFreeTimes = [];
+      this.chosingGoodContent = [];
+      this.usingMediaTogether = [];
     }
   }
 
