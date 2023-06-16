@@ -8,7 +8,7 @@ import {
   ToggleButtonGroup,
   Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { AvatarWithBadge } from "../AvatarWithBadge";
 import { CleaningServicesOutlined } from "@mui/icons-material";
@@ -17,17 +17,19 @@ import FamilyMember from "../../entities/familyMember";
 import { useFamily } from "../../context/context";
 import { StyleToggleButton } from "../AvatarWithBadge/styles";
 import ClearIcon from "@mui/icons-material/Clear";
+import SimpleDialog from "./ModalAvatarFamile";
+import PropTypes from 'prop-types';
 
-function FamiliyMemberComponent({ onDelete, id }) {
+function FamiliyMemberComponent({ onDelete, id, props }) {
   const { setMembers, members, hasThisFamilyMember } = useFamily();
   const [familyMember, setFamilyMember] = useState({ nameMember: "", age: "" });
+  
 
   const getDataMembers = () => {
     const currentMember = members.find((member) => member.id === id);
     if (currentMember) {
       setFamilyMember(currentMember);
     }
-    console.log(members);
   };
 
   const windowSize = useWindowSize();
@@ -40,8 +42,7 @@ function FamiliyMemberComponent({ onDelete, id }) {
     console.log(familyMember)
   };
 
-  const addFamilyMember = () => {
-    debugger
+  const addFamilyMember = () => {    
     const hasId = hasThisFamilyMember(id);
 
     const newMember = new FamilyMember(
@@ -55,8 +56,7 @@ function FamiliyMemberComponent({ onDelete, id }) {
       return;
     }
 
-    let updatedMembers = members.map((member) => {
-      debugger
+    let updatedMembers = members.map((member) => {     
       if (member.id == id && member !== newMember) {
         return { ...member, ...newMember };
       }
@@ -75,7 +75,25 @@ function FamiliyMemberComponent({ onDelete, id }) {
   useEffect(() => {
     getDataMembers();
   }, []);
+  
+  const avatar = [];
+  const [open, setOpen] = React.useState(false);
+  const [selectedValue, setSelectedValue] = React.useState(avatar[1]);
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (value) => {
+    setOpen(false);
+    setSelectedValue(value);
+  };
+
+  SimpleDialog.propTypes = {
+    onClose: PropTypes.func.isRequired,
+    open: PropTypes.bool.isRequired,
+    selectedValue: PropTypes.string.isRequired,
+  };
   return (
     <Box
       display="flex"
@@ -87,18 +105,14 @@ function FamiliyMemberComponent({ onDelete, id }) {
       padding={1}
       gap={2}
     >
-      <Stack direction="row" alignItems="center" gap={4}>
-        <AvatarWithBadge
-          url={"https://www.pngmart.com/files/5/Poro-PNG-Image.png"}
-          onSmallBadgeClick={() => {
-            console.log(
-              "Implementar logica para abrir a midal para editar o avatar."
-            );
-          }}
-        />
+      <Stack 
+      width={isMobile(windowSize) ? "100%" : "49%"}
+      sx={{marginTop: '12px'}} direction="row" alignItems="center" gap={4}>
+   
+      <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} />
+   
 
-        <Box>
-          <Typography>Family Member's Name</Typography>
+        <Box sx={{marginTop: '12px'}}>
           <TextField
             id="name-member-input"
             value={familyMember.nameMember}
@@ -110,34 +124,36 @@ function FamiliyMemberComponent({ onDelete, id }) {
           />
         </Box>
       </Stack>
-
-      {/* TODO: adicionar bot"ao para remover o componente ao clicar aqui, deve ser o iconde  removeer... */}
+      
       <DeleteButton aria-label="delete" onClick={onDelete}>
         <ClearIcon color="error" fontSize="large" />
       </DeleteButton>
 
-      <Box>
+      <Box sx={{display:'flex'}}>      
+        <Box>
         <Typography>Age</Typography>
-        <ToggleButtonGroup
-          sx={{ height: "3.5rem" }}
-          exclusive
-          value={familyMember.age}
-          onChange={(_, value) => handleDataMemberChange("age", value)}
-        >
-          <StyleToggleButton value="0-24"> 0-24 months</StyleToggleButton>
-          <StyleToggleButton value="2-3"> 2-3 years</StyleToggleButton>
-          <StyleToggleButton value="6-12"> 6-12 yearss</StyleToggleButton>
-          <StyleToggleButton value="13-18"> 13-18 years</StyleToggleButton>
-          <StyleToggleButton value="adult"> Adult </StyleToggleButton>
-        </ToggleButtonGroup>
-
-        <DeleteButtonDesktop
-          flexDirection={isMobile(windowSize) ? "column" : "row"}
-          aria-label="delete"
-          onClick={onDelete}
-        >
-          <CleaningServicesOutlined color="error" fontSize="large" />
-        </DeleteButtonDesktop>
+          <ToggleButtonGroup
+            sx={{ height: "3.5rem" }}
+            exclusive
+            value={familyMember.age}
+            onChange={(_, value) => handleDataMemberChange("age", value)}
+          >
+            <StyleToggleButton value="0-24"> 0-24 months</StyleToggleButton>
+            <StyleToggleButton value="2-3"> 2-3 years</StyleToggleButton>
+            <StyleToggleButton value="6-12"> 6-12 yearss</StyleToggleButton>
+            <StyleToggleButton value="13-18"> 13-18 years</StyleToggleButton>
+            <StyleToggleButton value="adult"> Adult </StyleToggleButton>
+          </ToggleButtonGroup>
+        </Box>
+        <Box sx={{marginTop: '2rem'}}>
+          <DeleteButtonDesktop
+            flexDirection={isMobile(windowSize) ? "column" : "row"}
+            aria-label="delete"
+            onClick={onDelete}
+          >
+            <ClearIcon color="error" fontSize="large" />
+          </DeleteButtonDesktop>
+        </Box>
       </Box>
     </Box>
   );

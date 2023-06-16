@@ -17,8 +17,7 @@ function Priorities() {
     console.log(family)
   };
 
-  const checkFalseValue = (object) => {
-    debugger;
+  const checkFalseValue = (object) => {    
     const hasFalseValue = Object.values(object).some(
       (value) => value === false
     );
