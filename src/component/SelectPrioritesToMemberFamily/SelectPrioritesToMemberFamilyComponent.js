@@ -20,10 +20,6 @@ function SelectPrioritesToMemberFamilyComponent({ data, index }) {
   const DESKTOP_SMALL_SIZE = 1023;
 
   const { text, stepper } = data;
-  let currentStepper = stepper;
-
-  console.log(data);
-  console.log(stepper);
 
   const handleToggle = (memberId) => {
     debugger;
@@ -43,9 +39,9 @@ function SelectPrioritesToMemberFamilyComponent({ data, index }) {
           debugger;
 
           // Verificar se o valor já existe no array mediaBalance do membro
-          const section = member[currentStepper].includes(text[index])
-            ? member[currentStepper].filter((value) => value !== text[index])
-            : [...member[currentStepper], text[index]];
+          const section = member[stepper].includes(text[index])
+            ? member[stepper].filter((value) => value !== text[index])
+            : [...member[stepper], text[index]];
           console.log(section);
 
           if (section) setSelectedButtons(true);
@@ -54,7 +50,7 @@ function SelectPrioritesToMemberFamilyComponent({ data, index }) {
           // Atualizar a propriedade mediaBalance do membro encontrado
           return {
             ...member,
-            [currentStepper]: section,
+            [stepper]: section,
           };
         }
 
@@ -77,9 +73,15 @@ function SelectPrioritesToMemberFamilyComponent({ data, index }) {
 
   useEffect(() => {
     const initialMemberSelected = {};
-
-    members.forEach((member) => {
-      const isSelected = member[currentStepper].includes(text[index]);
+    debugger
+    members.map((member) => { 
+      debugger
+      let teste = member[stepper];
+      let teste2 = member.mediaBalance;
+      console.log(member[stepper])
+      console.log(teste)
+      console.log(teste2)
+      const isSelected = member[stepper].topicos.includes(text[index]);
       initialMemberSelected[member.id] = isSelected;
     });
 
