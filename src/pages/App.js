@@ -457,9 +457,8 @@ function App(props) {
                       marginRight={isMobile(windowSize) ? "" : "1rem"}
                     >
                       {renderStepContent(activeStep)}
-                    </Box>
-                  </Box>
-                    <Box sx={{ padding: "2rem", background: "#FAFAEF" }}>
+                   
+                      <Box sx={{ padding: "2rem", background: "#FAFAEF" }}>
                       <Box>
                         <Box sx={{ marginBottom: "5rem" }}>
                           <Typography>
@@ -472,7 +471,12 @@ function App(props) {
                         </Box>
                       </Box>
                     </Box>
+                    </Box>
+                  </Box>
+               
                 </Box>
+
+             
                           
               </Box>
               <StyleBoxMobileButton 

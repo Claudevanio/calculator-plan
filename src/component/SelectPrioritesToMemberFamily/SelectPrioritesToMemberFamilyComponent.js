@@ -99,8 +99,10 @@ function SelectPrioritesToMemberFamilyComponent({ data, index }) {
           
           direction="row">
             <SelfImprovementIcon fontSize="large" color="success" />
-            <Stack>
-              <Typography sx={{fontSize:'16px'}}> {text[index]} </Typography>
+            <Stack >
+              <Box width={isMobile(windowSize) ? "" : "80%"}>
+                <Typography sx={{fontSize:'16px'}}> {text[index]} </Typography>
+              </Box>
               <Box>
                 <Button variant="outlined" onClick={handleReasonTips}>
                   {showReasonTips ? "Reason / Tips " : "Close "}
@@ -113,7 +115,7 @@ function SelectPrioritesToMemberFamilyComponent({ data, index }) {
 
         <Box >
           <Stack 
-          spacing={{ xs: 2, sm: 2}} direction="row" useFlexGap flexWrap="wrap"
+          spacing={{ xs: 1, sm: 2}} direction="row" useFlexGap flexWrap="wrap"
           display={isMobile(windowSize) ? "flex" : ""}
           justifyContent={isMobile(windowSize) ? "center" : ""}
           container gap={2} >
