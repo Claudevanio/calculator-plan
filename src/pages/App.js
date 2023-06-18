@@ -62,18 +62,13 @@ import PrintIcon from "@mui/icons-material/Print";
 function App(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { handleNext, handleBack, activeStep, setActiveStep } =
-    useFamily();
-    const [validation, setValidation] = useState(true);
+  const { handleNext, handleBack, activeStep, setActiveStep } = useFamily();
+  const [validation, setValidation] = useState(false);
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
   const drawerWidth = 240;
   const navItems = ["Log in", "Register"];
-
-  useEffect(() => {    
-    console.log('estive aqui')
-  }, [validation]);
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -375,9 +370,13 @@ function App(props) {
               </Box>
               <Box>
                 <StyleBoxMobileButton>
-                  <StyleButtonHome color="tertiary" variant="filledTonal" onClick={handleNext}>
+                  <StyleButtonHome
+                    color="tertiary"
+                    variant="filledTonal"
+                    onClick={handleNext}
+                  >
                     <StyleTypographyRight sx={{ color: "white" }}>
-                      <Box sx={{marginTop: '24px', paddingRight: '8px'}}>
+                      <Box sx={{ marginTop: "24px", paddingRight: "8px" }}>
                         <Typography>
                           {activeStep === steps.length - 1
                             ? "Finish"
@@ -400,10 +399,11 @@ function App(props) {
                   disabled={activeStep === 0}
                   onClick={handleBack}
                   sx={{ mr: 1 }}
-                  color="primary" variant="filled"
+                  color="primary"
+                  variant="filled"
                 >
                   <StyleTypographyLeft sx={{ color: "white" }}>
-                    <Box sx={{marginTop: '24px', paddingLeft:'13px'}}>
+                    <Box sx={{ marginTop: "24px", paddingLeft: "13px" }}>
                       <Typography>Back</Typography>
                       <Typography>
                         {activeStep} of {steps.length}
@@ -457,33 +457,34 @@ function App(props) {
                       marginRight={isMobile(windowSize) ? "" : "1rem"}
                     >
                       {renderStepContent(activeStep)}
-                   
+
                       <Box sx={{ padding: "2rem", background: "#FAFAEF" }}>
-                      <Box>
-                        <Box sx={{ marginBottom: "5rem" }}>
-                          <Typography>
-                            The information contained on this website should not
-                            be used as a substitute for the medical care and
-                            advice of your pediatrician. There may be variations
-                            in treatment that your pediatrician may recommend
-                            based on individual facts and circumstances.
-                          </Typography>
+                        <Box>
+                          <Box sx={{ marginBottom: "5rem" }}>
+                            <Typography>
+                              The information contained on this website should
+                              not be used as a substitute for the medical care
+                              and advice of your pediatrician. There may be
+                              variations in treatment that your pediatrician may
+                              recommend based on individual facts and
+                              circumstances.
+                            </Typography>
+                          </Box>
                         </Box>
                       </Box>
                     </Box>
-                    </Box>
                   </Box>
-               
                 </Box>
-
-             
-                          
               </Box>
-              <StyleBoxMobileButton 
-              sx={{ position: "relative" }}>
-                <StyleButtonRight color="primary" variant="filledTonal"  disabled={false} onClick={handleNext}>
+              <StyleBoxMobileButton sx={{ position: "relative" }}>
+                <StyleButtonRight
+                  color="primary"
+                  variant="filledTonal"
+                  disabled={activeStep == 2 ? validation : false}
+                  onClick={handleNext}
+                >
                   <StyleTypographyRight>
-                    <Box sx={{marginTop: '24px', paddingRight: '8px'}}> 
+                    <Box sx={{ marginTop: "24px", paddingRight: "8px" }}>
                       <Typography>
                         {activeStep === steps.length - 1
                           ? "Finish"

@@ -10,7 +10,7 @@ import FamiliyMemberComponent from "../../../FamileMember/FamileMemberComponent"
 import { useFamily } from "../../../../context/context";
 import { useEffect } from "react";
 
-function Families({setValidation}) {
+function Families({ setValidation }) {
   const {
     family,
     createFamily,
@@ -19,15 +19,16 @@ function Families({setValidation}) {
     countFamilyMembersComponent,
     setCountFamilyMembersComponent,
     generateId,
+    activeStep,
   } = useFamily();
 
-  const handleCreateFamily = (event) => {    
+  const handleCreateFamily = (event) => {
     event.preventDefault();
     const familyName = event.target.value;
     createFamily(familyName);
   };
 
-  const handleCreateMemberFamilyComponent = () => {    
+  const handleCreateMemberFamilyComponent = () => {
     setMembers((prevMembers) => [
       ...prevMembers,
       {
@@ -47,22 +48,25 @@ function Families({setValidation}) {
     );
   };
 
-  const handleDisableNextButton = (family, members) => {    
+  const handleDisableNextButton = (family, members) => {
     let isButtonDisabled = false;
-    const hasEmptyNameMember = members.some((member) => !member.nameMember);
 
-    if (!family.familyName) {
-      isButtonDisabled = true;
+    if (activeStep === 2) {
+      const hasEmptyNameMember = members.some((member) => !member.nameMember);
+
+      if (!family.familyName) {
+        isButtonDisabled = true;
+      }
+
+      if (hasEmptyNameMember) {
+        isButtonDisabled = true;
+      }
+
+      setValidation(isButtonDisabled);
     }
-
-    if (hasEmptyNameMember) {
-      isButtonDisabled = true;
-    }
-
-    setValidation(isButtonDisabled);
   };
 
-  useEffect(() => {  
+  useEffect(() => {
     handleDisableNextButton(family, members);
   }, [family, members]);
 
