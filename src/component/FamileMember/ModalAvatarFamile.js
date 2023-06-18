@@ -3,55 +3,15 @@ import PropTypes from "prop-types";
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
-import PersonIcon from "@mui/icons-material/Person";
-import AddIcon from "@mui/icons-material/Add";
 import Typography from "@mui/material/Typography";
-import { blue } from "@mui/material/colors";
 import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
 import { Stack } from "react-bootstrap";
-import EditIcon from "@mui/icons-material/Edit";
-import { Edit } from "@mui/icons-material";
 import { Box } from "@mui/material";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { DeleteButton } from "./styles";
 import ClearIcon from "@mui/icons-material/Clear";
-
-const StyledBadge = styled(Badge)(({ theme }) => ({
-  "& .MuiBadge-badge": {
-    backgroundColor: "#44b700",
-    color: "#44b700",
-    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
-    "&::after": {
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      borderRadius: "50%",
-      animation: "ripple 1.2s infinite ease-in-out",
-      border: "1px solid currentColor",
-      content: '""',
-    },
-  },
-  "@keyframes ripple": {
-    "0%": {
-      transform: "scale(.8)",
-      opacity: 1,
-    },
-    "100%": {
-      transform: "scale(2.4)",
-      opacity: 0,
-    },
-  },
-}));
-
 
 
 const SmallAvatar = styled(Avatar)(({ theme }) => ({

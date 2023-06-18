@@ -1,17 +1,12 @@
 import {
   Box,
-  Button,
-  IconButton,
   Stack,
   TextField,
-  ToggleButton,
   ToggleButtonGroup,
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useWindowSize } from "../../hooks/useWindowSize";
-import { AvatarWithBadge } from "../AvatarWithBadge";
-import { CleaningServicesOutlined } from "@mui/icons-material";
 import { DeleteButton, DeleteButtonDesktop } from "./styles";
 import FamilyMember from "../../entities/familyMember";
 import { useFamily } from "../../context/context";

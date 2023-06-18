@@ -14,7 +14,14 @@ export function FamilyContextProvider({ children }) {
     { id: generateId() },
     { id: generateId() },
   ]);
-  const [datas, setDatas] = useState([
+  const [activeStep, setActiveStep] = useState(2);
+
+  const [idMembers, setIdMembers] = useState(1);
+  const [countFamilyMembersComponent, setCountFamilyMembersComponent] =
+    useState([{ id: generateId() }, { id: generateId() }]);
+  const [isDisableNextButton, setIsDisableNextButton] = useState(false);
+
+  const datas = [
     {
       stepper: "mediaBalance",
       text: [
@@ -143,14 +150,7 @@ export function FamilyContextProvider({ children }) {
         "Realizing when we turn to media to dull our own emotions, and finding healthier ways to cope.",
       ],
     },
-  ]);
-  const [activeStep, setActiveStep] = useState(2);
-
-  const [idMembers, setIdMembers] = useState(1);
-  const [countFamilyMembersComponent, setCountFamilyMembersComponent] =
-    useState([{ id: generateId() }, { id: generateId() }]);
-  const [isDisableNextButton, setIsDisableNextButton] = useState(false);
- 
+  ];
 
   const createFamily = (nameFamily) => {
     const familyModel = new Family(nameFamily);
@@ -170,13 +170,13 @@ export function FamilyContextProvider({ children }) {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const setLocalStorage = (data) => {    
+  const setLocalStorage = (data) => {
     if (data) {
       Storage.set("family", data);
     }
   };
 
-  const getLocalStorage = () => {    
+  const getLocalStorage = () => {
     const family = Storage.get("family");
     if (family) {
       setFamily(family);
@@ -187,7 +187,6 @@ export function FamilyContextProvider({ children }) {
   };
 
   useEffect(() => {
-    debugger;
     getLocalStorage();
   }, []);
 

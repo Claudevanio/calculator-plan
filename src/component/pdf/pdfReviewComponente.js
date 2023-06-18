@@ -1,9 +1,8 @@
 
 import React from "react";
-import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 import { Box, Typography } from "@mui/material";
 import { AvatarWithBadge } from "../AvatarWithBadge";
-import { BoxStyle, ReviewBoxStyle, ReviewTypographyStyle, UlStyle } from "./pdfReviewStyle";
+import { BoxStyle,  ReviewTypographyStyle, UlStyle } from "./pdfReviewStyle";
 
 
 const MyPDFReviewComponent = ({ family, member }) => (

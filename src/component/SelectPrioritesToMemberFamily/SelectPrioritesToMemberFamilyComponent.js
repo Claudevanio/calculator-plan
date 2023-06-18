@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { useFamily } from "../../context/context";
 import { useEffect, useState } from "react";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 function SelectPrioritesToMemberFamilyComponent({ data, index }) {
   const { members, setMembers } = useFamily();
@@ -65,8 +66,7 @@ function SelectPrioritesToMemberFamilyComponent({ data, index }) {
 
   const [memberSelected, setMemberSelected] = useState({});
 
-  const handleReasonTips = () => {
-    debugger;
+  const handleReasonTips = () => {  
     setShowReasonTips((prev) => !prev);
   };
 
@@ -94,11 +94,13 @@ function SelectPrioritesToMemberFamilyComponent({ data, index }) {
         padding={2}
         gap={4}
       >
-        <Box>
-          <Stack direction="row">
+        <Box >
+          <Stack 
+          
+          direction="row">
             <SelfImprovementIcon fontSize="large" color="success" />
             <Stack>
-              <Typography variant="h6"> {text[index]} </Typography>
+              <Typography sx={{fontSize:'16px'}}> {text[index]} </Typography>
               <Box>
                 <Button variant="outlined" onClick={handleReasonTips}>
                   {showReasonTips ? "Reason / Tips " : "Close "}
@@ -109,13 +111,14 @@ function SelectPrioritesToMemberFamilyComponent({ data, index }) {
           </Stack>
         </Box>
 
-        <Box sx={{ maxHeight: "45%" }}>
-          <Grid 
+        <Box >
+          <Stack 
+          spacing={{ xs: 2, sm: 2}} direction="row" useFlexGap flexWrap="wrap"
           display={isMobile(windowSize) ? "flex" : ""}
           justifyContent={isMobile(windowSize) ? "center" : ""}
           container gap={2} >
             {members.map((member, index) => (
-              <Grid item key={index}>
+              <Box  key={index}>
                 <ToggleButton
                   selected={memberSelected[member.id]}
                   onChange={() => handleToggleMember(member.id)}
@@ -151,9 +154,9 @@ function SelectPrioritesToMemberFamilyComponent({ data, index }) {
                     </Stack>
                   </Stack>
                 </ToggleButton>
-              </Grid>
+              </Box>
             ))}
-          </Grid>
+          </Stack>
         </Box>
       </Box>
       <Box

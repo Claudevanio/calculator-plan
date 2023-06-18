@@ -47,8 +47,7 @@ function Families({setValidation}) {
     );
   };
 
-  const handleDisableNextButton = (family, members) => {
-    debugger
+  const handleDisableNextButton = (family, members) => {    
     let isButtonDisabled = false;
     const hasEmptyNameMember = members.some((member) => !member.nameMember);
 
@@ -63,8 +62,7 @@ function Families({setValidation}) {
     setValidation(isButtonDisabled);
   };
 
-  useEffect(() => {
-    debugger
+  useEffect(() => {  
     handleDisableNextButton(family, members);
   }, [family, members]);
 

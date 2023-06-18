@@ -4,10 +4,9 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import MyPDFViewer from "../../../pdf/pdfView";
 import MyPDFReviewComponent from "../../../pdf/pdfReviewComponente";
 import { Button } from "@mui/material";
-import ReactToPrint, { useReactToPrint } from "react-to-print";
+import { useReactToPrint } from "react-to-print";
 
 function Review(props) {
   const { children, value, index, ...other } = props;
@@ -136,14 +135,13 @@ export default function BasicTabs() {
             sx={{ background: "orange", color: "white" }}
             onClick={handlePrint}
           >
-            Imprimir el resumo del plan familiar de uso de pantalhas de los{" "}
+            Print Media Summary for The Undefined Family Media Plan{" "}
             {data.familyName}
           </Button>
         </Box>
         <Box>
           <Typography sx={{ textAlign: "center" }}>
-            Ingrese o regístrese para enviar su plan de uso de pantallas por
-            correo electrónico o mensaje de texto
+            Log in or register to email or text your media plan 
           </Typography>
         </Box>
       </Box>

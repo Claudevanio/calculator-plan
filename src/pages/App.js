@@ -5,7 +5,6 @@ import {
   StepLabel,
   Button,
   Typography,
-  Container,
   AppBar,
   CssBaseline,
   Drawer,
@@ -72,26 +71,7 @@ function App(props) {
   const drawerWidth = 240;
   const navItems = ["Log in", "Register"];
 
-  // const handleDisableNextButton = (family, members) => {
-  //   debugger;
-  //   let isButtonDisabled = false;
-  //   const hasEmptyNameMember = members.some((member) => !member.nameMember);
-
-  //   if (!family.familyName) {
-  //     isButtonDisabled = true;
-  //   }
-
-  //   if (hasEmptyNameMember) {
-  //     isButtonDisabled = true;
-  //   }
-  //   console.log(isButtonDisabled);
-  //   setValidation(isButtonDisabled);
-  // };
-
-
-
-  useEffect(() => {
-    debugger
+  useEffect(() => {    
     console.log('estive aqui')
   }, [validation]);
 
@@ -470,27 +450,30 @@ function App(props) {
                   </StyleBoxMobile>
                 </Box>
                 <Box>
-                  <Box
-                    padding={isMobile(windowSize) ? "1rem" : "2rem"}
-                    marginLeft={isMobile(windowSize) ? "" : "1rem"}
-                    marginRight={isMobile(windowSize) ? "" : "1rem"}
-                  >
-                    {renderStepContent(activeStep)}
-                  </Box>
-                  <Box sx={{ padding: "2rem", background: "#FAFAEF" }}>
-                    <Box>
-                      <Box sx={{ marginBottom: "5rem" }}>
-                        <Typography>
-                          The information contained on this website should not
-                          be used as a substitute for the medical care and
-                          advice of your pediatrician. There may be variations
-                          in treatment that your pediatrician may recommend
-                          based on individual facts and circumstances.
-                        </Typography>
-                      </Box>
+                  <Box>
+                    <Box
+                      padding={isMobile(windowSize) ? "1rem" : "2rem"}
+                      marginLeft={isMobile(windowSize) ? "" : "1rem"}
+                      marginRight={isMobile(windowSize) ? "" : "1rem"}
+                    >
+                      {renderStepContent(activeStep)}
                     </Box>
                   </Box>
+                    <Box sx={{ padding: "2rem", background: "#FAFAEF" }}>
+                      <Box>
+                        <Box sx={{ marginBottom: "5rem" }}>
+                          <Typography>
+                            The information contained on this website should not
+                            be used as a substitute for the medical care and
+                            advice of your pediatrician. There may be variations
+                            in treatment that your pediatrician may recommend
+                            based on individual facts and circumstances.
+                          </Typography>
+                        </Box>
+                      </Box>
+                    </Box>
                 </Box>
+                          
               </Box>
               <StyleBoxMobileButton 
               sx={{ position: "relative" }}>

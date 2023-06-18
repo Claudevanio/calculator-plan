@@ -45,16 +45,6 @@ const styles = StyleSheet.create({
   },
 });
 
-const booleanProps = [
-  "hasMediaBalance",
-  "hasCommunicatingAboutMedia",
-  //   "hasKindnessEmpathy",
-  //   "hasDigitalPrivacySafety",
-  //   "hasScreenFreeZones",
-  //   "hasScreenFreeTimes",
-  //   "hasChosingGoodContent",
-  //   "hasUsingMediaTogether",
-];
 
 const MyPDFComponent = ({ family, member }) => (
   <Document>
